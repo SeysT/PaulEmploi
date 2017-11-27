@@ -68,7 +68,7 @@ Pour installer les requirements :
 $ pip install -r requirements.txt
 ```
 
-### Faire tourner les différents serveurs
+## Faire tourner les différents serveurs
 
 #### 1. Serveur de développement frontend
 
