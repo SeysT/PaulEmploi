@@ -1,4 +1,4 @@
-# pierre-paul-jacques
+# pierre-client
 
 > A Vue.js project to help finding a job for Paul and its friends
 
