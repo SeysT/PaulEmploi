@@ -87,3 +87,10 @@ Pour faire tourner le serveur Django :
 $ cd jacques_serveur
 $ python manage.py runserver
 ```
+
+## Se connecter à la base de données
+
+pour se connecter à la base de données : http://localhost:8000/admin/
+
+- User : paul
+- Mot de passe : paulpaul 
