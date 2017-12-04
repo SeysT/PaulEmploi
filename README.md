@@ -15,7 +15,7 @@ Avant toute opération, il faut avoir installer les dépendances suivantes :
 Pour commencer il faut cloner le projet :
 
 ```sh
-$ git clone git@gitlab.centralesupelec.fr:2014legerm/paul-emploi.git
+$ git clone https://gitlab.centralesupelec.fr/2014legerm/paul-emploi.git
 $ cd paul-emploi
 ```
 
