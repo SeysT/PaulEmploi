@@ -4,7 +4,7 @@
 
 ### Pré-requis
 
-Avant toute opération, il faut avoir installer les dépendances suivantes :
+Avant toute opération, il faut avoir installé les dépendances suivantes :
 - Python 3.6+ : https://www.python.org/
 - NodeJS 8.9.1+ et npm 5.5.1+ : https://nodejs.org/
 
@@ -15,7 +15,7 @@ Avant toute opération, il faut avoir installer les dépendances suivantes :
 Pour commencer il faut cloner le projet :
 
 ```sh
-$ git clone git@gitlab.centralesupelec.fr:2014legerm/paul-emploi.git
+$ git clone https://gitlab.centralesupelec.fr/2014legerm/paul-emploi.git
 $ cd paul-emploi
 ```
 
