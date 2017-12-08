@@ -30,7 +30,7 @@ if __name__ == '__main__':
     token = auth_req.json()['access_token']
 
     # first request to know the number of results
-    url = 'https://api.emploi-store.fr/partenaire/offresdemploi/v1/rechercheroffres'
+    url = POLE_EMPLOI_SEARCH_URL
     header = {
         'Authorization': 'Bearer {}'.format(token),
         'Content-Type': 'application/json'
@@ -60,7 +60,7 @@ if __name__ == '__main__':
         data = {
             'technicalParameters': {
                 'page': page_number,
-                'per_page': 10,
+                'per_page': RESULTS_PER_PAGE,
                 'sort': 1
             },
             'criterias': {
