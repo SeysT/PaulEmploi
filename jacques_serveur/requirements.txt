@@ -4,6 +4,7 @@ decorator==4.1.2
 defusedxml==0.5.0
 Django==1.11.7
 django-braces==1.12.0
+django-cors-headers==2.1.0
 django-rest-framework-social-oauth2==1.0.8
 djangorestframework==3.7.3
 idna==2.6
