@@ -11,3 +11,9 @@ class OfferView(generics.ListAPIView):
 
     def get_queryset(self):
         return Offer.objects.all()
+
+class OfferDetailView(generics.RetrieveAPIView):
+    serializer_class = OfferSerializer
+
+    def get_queryset(self):
+        return Offer.objects.all()
