@@ -4,7 +4,7 @@
 
 ### Pré-requis
 
-Avant toute opération, il faut avoir installer les dépendances suivantes :
+Avant toute opération, il faut avoir installé les dépendances suivantes :
 - Python 3.6+ : https://www.python.org/
 - NodeJS 8.9.1+ et npm 5.5.1+ : https://nodejs.org/
 
