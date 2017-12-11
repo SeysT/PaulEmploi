@@ -90,7 +90,7 @@ $ python manage.py runserver
 
 ## Se connecter à la base de données
 
-pour se connecter à la base de données : http://localhost:8000/admin/
+pour se connecter à la base de données : https://germoon.nebulae.co/admin
 
 - User : paul
 - Mot de passe : paulpaul 
