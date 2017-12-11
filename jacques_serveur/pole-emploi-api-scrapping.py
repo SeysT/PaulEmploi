@@ -8,7 +8,7 @@ POLE_EMPLOI_CLIENT_ID = 'PAR_paulemploiletinderdescand_564ca946d246c8de2309f7967
 POLE_EMPLOI_CLIENT_SECRET = '7dd3b6f9d6ac3e33b331e71ae3a675189cbe8fec4d572a15cdad467a7e043f86'
 POLE_EMPLOI_SCOPE = 'application_PAR_paulemploiletinderdescand_564ca946d246c8de2309f7967d0fd1576d8f1fe8af69f0e82f0c45e54156e82f api_offresdemploiv1 o2dsoffre'
 
-POLE_EMPLOI_SEARCH_KEYWORD = 'informatique'
+POLE_EMPLOI_SEARCH_KEYWORD = 'programmation'
 RESULTS_PER_PAGE = 20
 offers_list = []
 
@@ -48,6 +48,7 @@ if __name__ == '__main__':
     first_offer = post(url, json=data, headers=header)
     tot_results = first_offer.json()['technicalParameters']['totalNumber']
     tot_pages = int(tot_results / RESULTS_PER_PAGE)
+    print("Nombre total d'offres : ", tot_results)
 
     # other request to get all the offers
     for page_number in range(1, tot_pages):
