@@ -2,29 +2,6 @@ from rest_framework import serializers
 
 from api.models.offer import Degree, Skill, Language, Contract, Location, Company, Offer
 
-class OfferSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Offer
-        fields = ('title',
-                'company',
-                'language',
-                'location',
-                'degree',
-                'min_salary',
-                'max_salary',
-                'contract_type',
-                'creation_date')
-
-class OfferExpandSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Offer
-        fields = ('skill',
-                  'description',
-                  'weekly_work_time',
-                  'experience_name')
-
 class DegreeSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -61,3 +38,43 @@ class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = '__all__'
+
+class OfferSerializer(serializers.ModelSerializer):
+    company = serializers.SlugRelatedField(read_only=True, slug_field='name')
+    language = serializers.SlugRelatedField(read_only=True, slug_field='name')
+    location = serializers.SlugRelatedField(read_only=True, slug_field='name')
+    degree = serializers.SlugRelatedField(read_only=True, slug_field='name')
+    contract_type = serializers.SlugRelatedField(read_only=True, slug_field='name')
+
+    class Meta:
+        model = Offer
+        fields = ('title',
+                'company',
+                'language',
+                'location',
+                'degree',
+                'min_salary',
+                'max_salary',
+                'contract_type',
+                'creation_date')
+
+class OfferExpandSerializer(OfferSerializer):
+    skill = serializers.SlugRelatedField(read_only=True, slug_field='name')
+    company = CompanySerializer(read_only=True)
+    location = LocationSerializer(read_only=True)
+
+    class Meta:
+        model = Offer
+        fields = ('title',
+                  'company',
+                  'language',
+                  'location',
+                  'degree',
+                  'min_salary',
+                  'max_salary',
+                  'contract_type',
+                  'creation_date',
+                  'skill',
+                  'description',
+                  'weekly_work_time',
+                  'experience_name')
