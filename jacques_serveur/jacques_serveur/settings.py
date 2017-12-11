@@ -25,7 +25,7 @@ SECRET_KEY = '3(0$n%by47^z!bgh4ja+^ic!q+9m0bh*v5**&elcl7q56%ucv+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.100.75', 'germoon.nebulae.co']
 
 
 # Application definition
@@ -89,13 +89,24 @@ WSGI_APPLICATION = 'jacques_serveur.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'vncgwige',
-        'USER': 'vncgwige',
-        'PASSWORD': 'QJqGs07VIF265xU0I3sHmu41wMPiRpzT',
-        'HOST': 'baasu.db.elephantsql.com',
-        'PORT': '5432',
+        'NAME': 'paul_emploi_db',
+        'USER': 'paul',
+        'PASSWORD': 'paulpaul',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'paul_emploi_db',
+#         'USER': 'paul',
+#         'PASSWORD': 'paulpaul',
+#         'HOST': 'germoon.nebulae.co',
+#         'PORT': '',
+#     }
+# }
 
 
 # Password validation
@@ -135,6 +146,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
