@@ -8,7 +8,6 @@ class DegreeSerializer(serializers.ModelSerializer):
         model = Degree
         fields = '__all__'
 
-
 class LanguageSerializer(serializers.ModelSerializer):
 
     class Meta:
