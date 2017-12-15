@@ -3,11 +3,12 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import Bucketlist from '@/components/Bucketlist'
 import HelloWorld from '@/components/HelloWorld'
-import AfficherAPI from '@/components/AfficherAPI'
+import Offer from '@/components/Offer'
+import OfferExpand from '@/components/OfferExpand'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
-Vue.http.options.root = 'http://localhost:8000/'
+Vue.http.options.root = 'http://localhost:8000/api/'
 
 export default new VueRouter({
   routes: [
@@ -22,9 +23,14 @@ export default new VueRouter({
       component: Bucketlist
     },
     {
-      path: '/afficherapi',
-      name: 'AfficherAPI',
-      component: AfficherAPI
+      path: '/offer',
+      name: 'Offer',
+      component: Offer
+    },
+    {
+      path: '/offer/expand',
+      name: 'OfferExpand',
+      component: OfferExpand
     }
   ]
 })
