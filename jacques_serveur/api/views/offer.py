@@ -5,7 +5,6 @@ from rest_framework.response import Response
 from api.models.offer import Offer
 from api.serializers.offer import OfferSerializer, OfferExpandSerializer
 
-
 class OfferViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = OfferSerializer
     queryset = Offer.objects.all()
