@@ -9,7 +9,6 @@
       <p>Minimum Salary: {{ min_salary }}</p>
       <p>Maximum Salary: {{ max_salary }}</p>
       <p>Contract Type: {{ contract_type }}</p>
-      <router-link to="offer/expand">Détails</router-link>
     </div>
 </template>
 

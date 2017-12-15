@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import Bucketlist from '@/components/Bucketlist'
 import HelloWorld from '@/components/HelloWorld'
-import Offer from '@/components/Offer'
-import OfferExpand from '@/components/OfferExpand'
+// import Offer from '@/components/Offer'
+// import OfferExpand from '@/components/OfferExpand'
+import Swipe from '@/components/Swipe'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -23,14 +24,9 @@ export default new VueRouter({
       component: Bucketlist
     },
     {
-      path: '/offer',
-      name: 'Offer',
-      component: Offer
-    },
-    {
-      path: '/offer/expand',
-      name: 'OfferExpand',
-      component: OfferExpand
+      path: '/swipe',
+      name: 'Swipe',
+      component: Swipe
     }
   ]
 })

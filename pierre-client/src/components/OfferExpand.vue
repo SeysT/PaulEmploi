@@ -1,6 +1,5 @@
 <template>
   <div>
-    <router-link to="/offer">Retour</router-link>
     <h1>Detailled Offer</h1>
     <p>Company Description: {{ company_description }}</p>
     <p>Company Website: {{ website }}</p>
