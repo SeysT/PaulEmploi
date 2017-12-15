@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import Bucketlist from '@/components/Bucketlist'
 import HelloWorld from '@/components/HelloWorld'
+import AfficherAPI from '@/components/AfficherAPI'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -19,6 +20,11 @@ export default new VueRouter({
       path: '/bucket',
       name: 'Bucketlist',
       component: Bucketlist
+    },
+    {
+      path: '/afficherapi',
+      name: 'AfficherAPI',
+      component: AfficherAPI
     }
   ]
 })
