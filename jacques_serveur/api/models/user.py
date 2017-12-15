@@ -25,14 +25,14 @@ class Profile(models.Model):
     @property
     def seen_offers(self):
         """Return all offers seen by the user"""
-        return self.accepted_offers | self.refused_offers
+        return self.accepted_offers.all().union(self.refused_offers.all())
 
     def accept_offer(self, offer):
-        """This class wrapps the add function off accepted_offers attributes"""
+        """This class wrapps the add function of accepted_offers attributes"""
         self.accepted_offers.add(offer)
 
     def refuse_offer(self, offer):
-        """This class wrapps the add function off refused_offers attributes"""
+        """This class wrapps the add function of refused_offers attributes"""
         self.refused_offers.add(offer)
 
 
