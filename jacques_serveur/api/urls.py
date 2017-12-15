@@ -4,7 +4,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 from api.views.bucketlist import BucketlistView, BucketlistDetailView
 from api.views.user import UserView, UserDetailView
-from api.views.offer import OfferView, OfferDetailView, OfferExpandView, DegreeDetailView, SkillDetailView, LanguageDetailView, ContractDetailView, LocationDetailView, CompanyDetailView
+from api.views.offer import OfferView, OfferDetailView, OfferExpandView#, DegreeDetailView, SkillDetailView, LanguageDetailView, ContractDetailView, LocationDetailView, CompanyDetailView
 
 urlpatterns = {
     url(r'^users/$', UserView.as_view()),
