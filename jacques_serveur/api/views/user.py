@@ -1,11 +1,11 @@
 from django.contrib.auth.models import User
 
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, serializers
 from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 
 from api.models.user import Profile
-from api.serializers.offer import OfferSerializer
+from api.serializers.offer import OfferSerializer, OfferIdSerializer
 from api.serializers.user import UserSerializer, ProfileSerializer
 
 
@@ -48,6 +48,6 @@ class UserViewSet(viewsets.ModelViewSet):
             offers_to_show = profile.offers_to_show
         except User.DoesNotExist or Profile.DoesNotExist:
             return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
-        serializer = OfferSerializer(offers_to_show, many=True)
+        serializer = OfferIdSerializer(offers_to_show, many=True)
         return Response(serializer.data)
 

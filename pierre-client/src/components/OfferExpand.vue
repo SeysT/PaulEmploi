@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Detailled Offer</h1>
+    <h1>Detailed Offer</h1>
     <p>Company Description: {{ company_description }}</p>
     <p>Company Website: {{ website }}</p>
     <p>Skill: {{ skill }}</p>
@@ -12,7 +12,13 @@
 
 <script>
   export default {
-    name: 'Offer',
+    name: 'OfferExpand',
+    props: {
+      offer_id: {
+        type: String,
+        default: '1'
+      }
+    },
     data () {
       return {
         company_description: '',
@@ -24,9 +30,9 @@
       }
     },
     methods: {
-      get_detailed_offer: function (i) {
-        let link = 'offers/' + i + '/expand/'
-        this.$http.get(link).then(function (data) {
+      get_detailed_offer: function (id) {
+        let url = 'offers/' + id + '/expand'
+        this.$http.get(url).then(function (data) {
           this.company_description = data.body.company.description
           this.website = data.body.company.url
           this.skill = data.body.skill
@@ -37,7 +43,7 @@
       }
     },
     created: function () {
-      this.get_detailed_offer('1')
+      this.get_detailed_offer(this.offer_id)
     }
   }
 </script>

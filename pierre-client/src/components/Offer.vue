@@ -15,6 +15,12 @@
 <script>
     export default {
       name: 'Offer',
+      props: {
+        offer_id: {
+          type: String,
+          default: '1'
+        }
+      },
       data () {
         return {
           title: '',
@@ -28,9 +34,9 @@
         }
       },
       methods: {
-        get_offer: function (i) {
-          let link = 'offers/' + i + '/'
-          this.$http.get(link).then(function (data) {
+        get_offer: function (id) {
+          let url = 'offers/' + id
+          this.$http.get(url).then(function (data) {
             this.title = data.body.title
             this.company = data.body.company
             this.language = data.body.language
@@ -41,7 +47,7 @@
         }
       },
       created: function () {
-        this.get_offer('1')
+        this.get_offer(this.offer_id)
       }
     }
 </script>

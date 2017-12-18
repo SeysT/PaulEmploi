@@ -44,6 +44,13 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = '__all__'
 
+
+class OfferIdSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Offer
+        fields = ('id',)
+
 class OfferSerializer(serializers.ModelSerializer):
     company = serializers.SlugRelatedField(read_only=True, slug_field='name')
     language = serializers.SlugRelatedField(read_only=True, slug_field='name')
