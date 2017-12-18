@@ -1,12 +1,13 @@
 from django.contrib.auth.models import User
-from api.models.user import Profile
 
 from rest_framework import viewsets, status
 from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 
-from api.serializers.user import UserSerializer, ProfileSerializer
+from api.models.user import Profile
 from api.serializers.offer import OfferSerializer
+from api.serializers.user import UserSerializer, ProfileSerializer
+
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer

@@ -1,4 +1,3 @@
-from api.models.bucketlist import Bucketlist
 from api.models.offer import (
     Degree,
     Skill,

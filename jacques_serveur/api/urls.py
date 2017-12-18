@@ -3,6 +3,7 @@ from rest_framework.routers import DefaultRouter
 from api.views.offer import OfferViewSet
 from api.views.user import UserViewSet
 
+
 router = DefaultRouter()
 router.register(r'offers', OfferViewSet, base_name='offer')
 router.register(r'users', UserViewSet, base_name='user')

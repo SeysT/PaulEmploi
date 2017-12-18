@@ -6,6 +6,7 @@ from api.models.offer import Offer
 from api.models.user import AlreadySeenOfferException
 from api.serializers.offer import OfferSerializer, OfferExpandSerializer
 
+
 class OfferViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = OfferSerializer
     queryset = Offer.objects.all()
