@@ -163,3 +163,8 @@ AUTHENTICATION_BACKENDS = (
     'rest_framework_social_oauth2.backends.DjangoOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+try:
+    from jacques_serveur.local_settings import *
+except ImportError:
+    pass
