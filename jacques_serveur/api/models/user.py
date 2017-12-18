@@ -5,7 +5,6 @@ from django.dispatch import receiver
 
 from api.models.offer import Offer
 
-
 class Profile(models.Model):
     """
     This class extends the User class from django using a OneToOne relation.
@@ -14,6 +13,7 @@ class Profile(models.Model):
         - accepted_offers: all offers accepted by user
         - refused_offers: all offers refused by user
         - seen_offers: return all offers seen by user (combine accepted and refused offers)
+        - offers_to_show: return all offers we might want to show to the user
     + methods:
         - accept_offer: add the given offer to accepted_offers
         - refuse_offer: add the given offer to refused_offers
@@ -26,6 +26,11 @@ class Profile(models.Model):
     def seen_offers(self):
         """Return all offers seen by the user"""
         return self.accepted_offers.all().union(self.refused_offers.all())
+
+    @property
+    def offers_to_show(self):
+        """Return all offers we might want to show to the user"""
+        return Offer.objects.difference(self.seen_offers.all())
 
     def accept_offer(self, offer):
         """This class wrapps the add function of accepted_offers attributes"""
