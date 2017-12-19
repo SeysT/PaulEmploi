@@ -3,6 +3,8 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from rest_framework.authtoken.models import Token
+
 from api.models.offer import Offer
 
 class Profile(models.Model):
@@ -52,3 +54,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     """This function update the Profile model when the User model is saved"""
     instance.profile.save()
+
+
+@receiver(post_save, sender=User)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
