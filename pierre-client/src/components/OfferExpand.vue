@@ -25,9 +25,8 @@
     },
     methods: {
       get_detailed_offer: function (i) {
-        let link = 'offers/' + i + '/expand'
+        let link = 'offers/' + i + '/expand/'
         this.$http.get(link).then(function (data) {
-          console.log(data)
           this.company_description = data.body.company.description
           this.website = data.body.company.url
           this.skill = data.body.skill

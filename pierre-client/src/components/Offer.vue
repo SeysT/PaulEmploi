@@ -29,10 +29,8 @@
       },
       methods: {
         get_offer: function (i) {
-          let link = 'offers/'
-          link += i
+          let link = 'offers/' + i + '/'
           this.$http.get(link).then(function (data) {
-            console.log(data)
             this.title = data.body.title
             this.company = data.body.company
             this.language = data.body.language
