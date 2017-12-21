@@ -17,10 +17,11 @@ class Profile(models.Model):
     + methods:
         - accept_offer: add the given offer to accepted_offers
         - refuse_offer: add the given offer to refused_offers
+        - _check_offer: raise exception if the given offer has been already seen
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    accepted_offers = models.ManyToManyField(Offer, related_name='accepted_offers')
-    refused_offers = models.ManyToManyField(Offer, related_name='refused_offers')
+    accepted_offers = models.ManyToManyField(Offer, related_name='accepted_by')
+    refused_offers = models.ManyToManyField(Offer, related_name='refused_by')
 
     @property
     def seen_offers(self):
@@ -33,12 +34,42 @@ class Profile(models.Model):
         return Offer.objects.difference(self.seen_offers.all())
 
     def accept_offer(self, offer):
-        """This class wrapps the add function of accepted_offers attributes"""
+        """This function wrapps the add function of accepted_offers attributes"""
+        self._check_offer(offer)
         self.accepted_offers.add(offer)
 
     def refuse_offer(self, offer):
-        """This class wrapps the add function of refused_offers attributes"""
+        """This function wrapps the add function of refused_offers attributes"""
+        self._check_offer(offer)
         self.refused_offers.add(offer)
+
+    def _check_offer(self, offer):
+        """This function raise an exception if the given offer has already been seen by the user"""
+        if offer in self.accepted_offers.all():
+            raise AlreadyAcceptedOfferException
+        elif offer in self.refused_offers.all():
+            raise AlreadyRefusedOfferException
+
+
+class AlreadySeenOfferException(Exception):
+    """This exception can be raised when we detect the user has already seen a given offer."""
+    def __init__(self, message='This offer has already been seen for this user.'):
+        self.message = message
+
+    def __str__(self):
+        return self.message
+
+
+class AlreadyAcceptedOfferException(AlreadySeenOfferException):
+    """This exception can be raised when we detect the user has already accepted a given offer."""
+    def __init__(self, message='This offer has already been accepted for this user.'):
+        self.message = message
+
+
+class AlreadyRefusedOfferException(AlreadySeenOfferException):
+    """This exception can be raised when we detect the user has already refused a given offer."""
+    def __init__(self, message='This offer has already been refused for this user.'):
+        self.message = message
 
 
 @receiver(post_save, sender=User)

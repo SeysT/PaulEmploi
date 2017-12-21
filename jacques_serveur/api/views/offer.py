@@ -3,6 +3,7 @@ from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 
 from api.models.offer import Offer
+from api.models.user import AlreadySeenOfferException
 from api.serializers.offer import OfferSerializer, OfferExpandSerializer
 
 class OfferViewSet(viewsets.ReadOnlyModelViewSet):
@@ -31,7 +32,13 @@ class OfferViewSet(viewsets.ReadOnlyModelViewSet):
                 {'result': 'Error', 'detail': 'Not found.'},
                 status=status.HTTP_404_NOT_FOUND
             )
-        request.user.profile.accept_offer(offer)
+        try:
+            request.user.profile.accept_offer(offer)
+        except AlreadySeenOfferException as exception:
+            return Response(
+                {'result': 'Error', 'detail': exception.message},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         return Response({'result': 'Success'})
 
     @detail_route(methods=['get'])
@@ -45,7 +52,13 @@ class OfferViewSet(viewsets.ReadOnlyModelViewSet):
                 {'result': 'Error', 'detail': 'Not found.'},
                 status=status.HTTP_404_NOT_FOUND
             )
-        request.user.profile.refused_offer(offer)
+        try:
+            request.user.profile.refuse_offer(offer)
+        except AlreadySeenOfferException as exception:
+            return Response(
+                {'result': 'Error', 'detail': exception.message},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         return Response({'result': 'Success'})
 
 
