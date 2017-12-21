@@ -25,7 +25,7 @@ SECRET_KEY = '3(0$n%by47^z!bgh4ja+^ic!q+9m0bh*v5**&elcl7q56%ucv+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.100.75', 'germoon.nebulae.co']
+ALLOWED_HOSTS = ['192.168.100.75', 'germoon.nebulae.co', 'localhost']
 
 
 # Application definition
