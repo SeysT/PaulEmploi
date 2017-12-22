@@ -31,7 +31,7 @@ class Offer_Selector:
         score = score_location * score_min_salary * score_contract * (score_skills * 5 + score_language)
         return score
 
-    def get_interesting_offers(self, nombreMax):
+    def get_interesting_offers(self, max_number=None):
         # Stocking interesting offers in a ordered list 'temp' where the 
         # elemets of this list are lists [offer, score]
         offers = [
@@ -40,7 +40,8 @@ class Offer_Selector:
             if self.compute_score(offer) >= 5
         ]
         offers.sort(key=lambda offer_tuple: offer_tuple[1])
-        offer_ordered_pk = [liste[0].pk for liste in offers][:nombreMax]
+        offer_ordered_pk = [liste[0].pk for liste in offers][:max_number] if max_number != None
+                           else [liste[0].pk for liste in offers]
         # definning a query object that contains all the interessting offers sorted
         clauses = ' '.join(['WHEN id=%s THEN %s' % (pk, i) for i, pk in enumerate(offer_ordered_pk)])
         ordering = 'CASE %s END' % clauses
