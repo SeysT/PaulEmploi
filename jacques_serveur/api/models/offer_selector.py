@@ -5,8 +5,8 @@ from api.models.offer import Offer, Location, Interest, Degree, Skill, Experienc
 
 class Offer_Selector:
 
-    def __init__(self, profile, avaiOff):
-        self.available_offers = avaiOff
+    def __init__(self, profile, avai_offers):
+        self.available_offers = avai_offers
         self.profile = profile
         # definition of matching criteria
         self.desired_location = profile.desired_location
