@@ -31,7 +31,7 @@
     },
     methods: {
       get_expanded_offer: function (id) {
-        let url = 'offers/' + id + '/expand'
+        let url = 'offers/' + id + '/expand/'
         this.$http.get(url).then(function (data) {
           this.company_description = data.body.company.description
           this.website = data.body.company.url
