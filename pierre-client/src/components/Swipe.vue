@@ -1,6 +1,8 @@
 <template>
   <div>
     <Card v-for="id in offers_ids" :offer_id="id" :key="id"></Card>
+    <button v-on:click.prevent="like()">Like</button>
+    <button v-on:click.prevent="dislike()">Dislike</button>
   </div>
 </template>
 
@@ -14,7 +16,7 @@
     },
     data () {
       return {
-        offers_ids: []
+        offers_ids: ['1', '2', '3']
       }
     },
     methods: {
@@ -24,6 +26,20 @@
           console.log(data)
           this.offers_ids = data.body.map(offer => offer.id.toString())
         })
+      },
+      like: function () {
+        let url = 'offers/' + this.offers_ids[0] + '/accept/'
+        this.$http.get(url).then(function (data) {
+          console.log(data)
+        })
+        this.offers_ids.shift()
+      },
+      dislike: function () {
+        let url = 'offers/' + this.offers_ids[0] + '/refuse/'
+        this.$http.get(url).then(function (data) {
+          console.log(data)
+        })
+        this.offers_ids.shift()
       }
     },
     created: function () {

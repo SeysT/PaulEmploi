@@ -36,7 +36,7 @@ class Profile(models.Model):
 
     desired_location = models.ForeignKey(Location)
     interests = models.ManyToManyField(Interest)
-    degrees = models.ManyToManyKey(Degree)
+    degrees = models.ManyToManyField(Degree)
     skills = models.ManyToManyField(Skill)
     languages = models.ManyToManyField(Language)
     desired_min_salary = models.BigIntegerField()
