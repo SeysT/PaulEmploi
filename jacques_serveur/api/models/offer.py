@@ -39,6 +39,15 @@ class Company(models.Model):
     description = models.CharField(max_length=1000, null=True)
 
 
+class Formation(models.Model):
+    name = models.CharField(max_length=255)
+    required_skills = models.ManyToManyField(Skill, null=True)
+    acquired_skills = models.ManyToManyField(Skill, null=True)
+    required_degree = models.ManyToManyField(Degree, null=True)
+    acquired_degree = models.ForeignKey(Degree, null=True)
+    duration = models.CharField(max_length=255, null=True)
+
+
 class Offer(models.Model):
     title = models.CharField(max_length=255)
     degrees = models.ManyToManyField(Degree)
