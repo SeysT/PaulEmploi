@@ -41,9 +41,10 @@ class Company(models.Model):
 
 class Formation(models.Model):
     name = models.CharField(max_length=255)
-    formationSkill = models.ForeignKey(Skill, on_delete=models.CASCADE, null=True)
-    lieuLatitude = models.BigIntegerField(null=True)
-    lieuLongitude = models.BigIntegerField(null=True)
+    required_skills = models.ManyToManyKey(Skill, null=True)
+    formation_skills = models.ManyToManyKey(Skill, null=True)
+    required_degree = models.ManyToManyKey(Degree, null=True)
+    formation_degree = models.ForeignKey(Degree, null=True)
     duree = models.CharField(max_length=255, null=True)
 
 
