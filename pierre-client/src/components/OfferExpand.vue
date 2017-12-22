@@ -30,7 +30,7 @@
       }
     },
     methods: {
-      get_detailed_offer: function (id) {
+      get_expanded_offer: function (id) {
         let url = 'offers/' + id + '/expand'
         this.$http.get(url).then(function (data) {
           this.company_description = data.body.company.description
@@ -43,7 +43,7 @@
       }
     },
     created: function () {
-      this.get_detailed_offer(this.offer_id)
+      this.get_expanded_offer(this.offer_id)
     }
   }
 </script>
