@@ -31,8 +31,8 @@ class Profile(models.Model):
         - _check_offer: raise exception if the given offer has been already seen
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    accepted_offers = models.ManyToManyField(Offer, related_name = 'accepted_by')
-    refused_offers = models.ManyToManyField(Offer, related_name = 'refused_by')
+    accepted_offers = models.ManyToManyField(Offer, related_name='accepted_by')
+    refused_offers = models.ManyToManyField(Offer, related_name='refused_by')
 
     desired_location = models.ForeignKey(Location)
     interests = models.ManyToManyField(Interest)
