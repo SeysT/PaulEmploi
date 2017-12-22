@@ -5,6 +5,7 @@ from django.dispatch import receiver
 
 from api.models.offer import Offer
 
+
 class Profile(models.Model):
     """
     This class extends the User class from django using a OneToOne relation.
