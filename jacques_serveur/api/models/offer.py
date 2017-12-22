@@ -9,6 +9,10 @@ class Skill(models.Model):
     name = models.CharField(max_length=255, null=True)
 
 
+class Interest(models.Model):
+    name = models.CharField(max_length=255)
+
+
 class Language(models.Model):
     name = models.CharField(max_length=255, null=True)
 
