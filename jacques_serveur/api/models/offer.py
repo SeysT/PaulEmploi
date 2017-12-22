@@ -31,16 +31,16 @@ class Company(models.Model):
 
 class Offer(models.Model):
     title = models.CharField(max_length=255)
-    degree = models.ManyToManyField(Degree)
-    language = models.ManyToManyField(Language)
-    skill = models.ManyToManyField(Skill)
+    degrees = models.ManyToManyField(Degree)
+    languages = models.ManyToManyField(Language)
+    skills = models.ManyToManyField(Skill)
     min_salary = models.BigIntegerField(null=True)
     max_salary = models.BigIntegerField(null=True)
     description = models.CharField(max_length=5000, null=True)
     contract_type = models.ForeignKey(Contract, null=True)
     weekly_work_time = models.CharField(max_length=255, null=True)
-    company = models.ManyToManyField(Company)
-    location = models.ManyToManyField(Location)
+    company = models.ForeignKey(Company, null=True)
+    location = models.ForeignKey(Location, null=True)
     experience_name = models.CharField(max_length=255, null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
 
@@ -51,9 +51,9 @@ class Offer(models.Model):
         EXPERIENCE_NAME: {}\nCREATION_DATE: {}\n
         """.format(
             self.title,
-            self.degree,
-            self.language,
-            self.skill,
+            self.degrees,
+            self.languages,
+            self.skills,
             self.min_salary,
             self.max_salary,
             self.description,
