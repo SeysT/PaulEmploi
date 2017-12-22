@@ -39,6 +39,14 @@ class Company(models.Model):
     description = models.CharField(max_length=1000, null=True)
 
 
+class Formation(models.Model):
+    name = models.CharField(max_length=255)
+    formationSkill = models.ForeignKey(Skill, on_delete=models.CASCADE, null=True)
+    lieuLatitude = models.BigIntegerField(null=True)
+    lieuLongitude = models.BigIntegerField(null=True)
+    duree = models.CharField(max_length=255, null=True)
+
+
 class Offer(models.Model):
     title = models.CharField(max_length=255)
     degrees = models.ManyToManyField(Degree)
