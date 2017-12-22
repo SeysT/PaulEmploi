@@ -31,17 +31,17 @@ class Profile(models.Model):
         - _check_offer: raise exception if the given offer has been already seen
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    accepted_offers = models.ManyToManyField(Offer, related_name='accepted_by')
-    refused_offers = models.ManyToManyField(Offer, related_name='refused_by')
+    accepted_offers = models.ManyToManyField(Offer, related_name = 'accepted_by')
+    refused_offers = models.ManyToManyField(Offer, related_name = 'refused_by')
 
     desired_location = models.ForeignKey(Location)
-    interests = models.ManyToManyField(Interest, related_name='interests')
+    interests = models.ManyToManyField(Interest)
     degrees = models.ManyToManyKey(Degree)
-    skills = models.ManyToManyField(Skill, related_name='skills')
-    languages = models.ManyToManyField(Language, related_name='languages')
+    skills = models.ManyToManyField(Skill)
+    languages = models.ManyToManyField(Language)
     desired_min_salary = models.BigIntegerField()
     desired_max_salary = models.BigIntegerField()
-    desired_contract = models.ForeignKey(Contract, related_name='desired_contract')
+    desired_contract = models.ForeignKey(Contract)
 
     @property
     def seen_offers(self):
