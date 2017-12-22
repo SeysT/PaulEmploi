@@ -10,8 +10,6 @@
       <OfferExpand :offer_id="offer_id"></OfferExpand>
       <button disabled>Droite</button>
     </div>
-    <button v-on:click.prevent="like()">Like</button>
-    <button v-on:click.prevent="dislike()">Dislike</button>
   </div>
 </template>
 
@@ -39,12 +37,6 @@
     methods: {
       toggle: function () {
         this.isExpanded = !this.isExpanded
-      },
-      like: function () {
-        return null
-      },
-      dislike: function () {
-        return null
       }
     }
   }
