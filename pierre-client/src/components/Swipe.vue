@@ -16,7 +16,7 @@
     },
     data () {
       return {
-        offers_ids: ['1', '2', '3'],
+        offers_ids: ['1', '2', '3']
       }
     },
     methods: {
