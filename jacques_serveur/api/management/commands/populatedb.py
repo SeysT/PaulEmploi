@@ -127,21 +127,21 @@ class Command(BaseCommand):
                         item_obj, exists = Skill.objects.get_or_create(
                             name=item_name
                         )
-                        sql_off.skill.add(item_obj)
+                        sql_off.skills.add(item_obj)
 
                     for item in offer.get('degrees'):
                         item_name = item.get('degreeName')
                         item_obj, exists = Degree.objects.get_or_create(
                             name=item_name
                         )
-                        sql_off.degree.add(item_obj)
+                        sql_off.degrees.add(item_obj)
 
                     for item in offer.get('languages'):
                         item_name = item.get('languageName')
                         item_obj, exists = Language.objects.get_or_create(
                             name=item_name
                         )
-                        sql_off.language.add(item_obj)
+                        sql_off.languages.add(item_obj)
 
                     if offer.get('contractTypeName') is not None:
                         item_name = offer.get('contractTypeName')
@@ -149,6 +149,7 @@ class Command(BaseCommand):
                             name=item_name
                         )
                         sql_off.contract_type = item_obj
+                        sql_off.save()
 
                     if offer.get('companyName') is not None:
                         item_name = offer.get('companyName')
@@ -159,7 +160,8 @@ class Command(BaseCommand):
                             url=item_url,
                             description=item_description
                         )
-                        sql_off.company.add(item_obj)
+                        sql_off.company = item_obj
+                        sql_off.save()
 
                     if offer.get('cityName') is not None:
                         item_name = offer.get('cityName') + ', ' \
@@ -172,6 +174,7 @@ class Command(BaseCommand):
                             gps_latitude=item_lat,
                             gps_longitude=item_long
                         )
-                        sql_off.location.add(item_obj)
+                        sql_off.location = item_obj
+                        sql_off.save()
 
                 sleep(POLE_EMPLOI_API_TIMEOUT)

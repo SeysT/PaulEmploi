@@ -53,18 +53,18 @@ class OfferIdSerializer(serializers.ModelSerializer):
 
 class OfferSerializer(serializers.ModelSerializer):
     company = serializers.SlugRelatedField(read_only=True, slug_field='name')
-    language = serializers.SlugRelatedField(read_only=True, slug_field='name')
+    languages = LanguageSerializer(many=True, read_only=True)
     location = serializers.SlugRelatedField(read_only=True, slug_field='name')
-    degree = serializers.SlugRelatedField(read_only=True, slug_field='name')
+    degrees = DegreeSerializer(many=True, read_only=True)
     contract_type = serializers.SlugRelatedField(read_only=True, slug_field='name')
 
     class Meta:
         model = Offer
         fields = ('title',
                 'company',
-                'language',
+                'languages',
                 'location',
-                'degree',
+                'degrees',
                 'min_salary',
                 'max_salary',
                 'contract_type',
@@ -72,7 +72,7 @@ class OfferSerializer(serializers.ModelSerializer):
 
 
 class OfferExpandSerializer(OfferSerializer):
-    skill = serializers.SlugRelatedField(read_only=True, slug_field='name')
+    skills = SkillSerializer(many=True, read_only=True)
     company = CompanySerializer(read_only=True)
     location = LocationSerializer(read_only=True)
 
@@ -80,14 +80,14 @@ class OfferExpandSerializer(OfferSerializer):
         model = Offer
         fields = ('title',
                   'company',
-                  'language',
+                  'languages',
                   'location',
-                  'degree',
+                  'degrees',
                   'min_salary',
                   'max_salary',
                   'contract_type',
                   'creation_date',
-                  'skill',
+                  'skills',
                   'description',
                   'weekly_work_time',
                   'experience_name')
