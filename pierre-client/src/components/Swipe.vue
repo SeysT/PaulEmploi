@@ -1,8 +1,6 @@
 <template>
   <div>
-    <Card></Card>
-    <button v-on:click.prevent="like()">Like</button>
-    <button v-on:click.prevent="dislike()">Dislike</button>
+    <Card v-for="id in offers_ids" :offer_id="id" :key="id"></Card>
   </div>
 </template>
 
@@ -14,13 +12,22 @@
     components: {
       Card
     },
-    methods: {
-      like: function () {
-        return null
-      },
-      dislike: function () {
-        return null
+    data () {
+      return {
+        offers_ids: []
       }
+    },
+    methods: {
+      get_offers_ids: function () {
+        let url = 'users/' + '2' + '/offers_to_show'
+        this.$http.get(url).then(function (data) {
+          console.log(data)
+          this.offers_ids = data.body.map(offer => offer.id)
+        })
+      }
+    },
+    created: function () {
+      this.get_offers_ids()
     }
   }
 </script>
