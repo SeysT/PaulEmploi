@@ -32,8 +32,8 @@ class Offer_Selector:
         return score
 
     def get_interesting_offers(self, max_number=None):
-        # Stocking interesting offers in a ordered list 'temp' where the 
-        # elemets of this list are lists [offer, score]
+        # Stocking interesting offers in a ordered list 'offers' where the 
+        # elemets of this list are tuples (offer, score)
         offers = [
             (offer, self.compute_score(offer))
             for offer in self.available_offers
