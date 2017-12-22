@@ -5,7 +5,15 @@ from django.dispatch import receiver
 
 from rest_framework.authtoken.models import Token
 
-from api.models.offer import Offer
+from api.models.offer import (
+    Offer,
+    Location,
+    Interest,
+    Degree,
+    Skill,
+    Language,
+    Contract
+)
 
 
 class Profile(models.Model):
@@ -25,6 +33,15 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     accepted_offers = models.ManyToManyField(Offer, related_name='accepted_by')
     refused_offers = models.ManyToManyField(Offer, related_name='refused_by')
+
+    desired_location = models.ForeignKey(Location)
+    interests = models.ManyToManyField(Interest)
+    degrees = models.ManyToManyKey(Degree)
+    skills = models.ManyToManyField(Skill)
+    languages = models.ManyToManyField(Language)
+    desired_min_salary = models.BigIntegerField()
+    desired_max_salary = models.BigIntegerField()
+    desired_contract = models.ForeignKey(Contract)
 
     @property
     def seen_offers(self):
