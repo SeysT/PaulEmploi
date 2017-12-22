@@ -16,15 +16,21 @@ class Interest(models.Model):
 class Language(models.Model):
     name = models.CharField(max_length=255, null=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Contract(models.Model):
     name = models.CharField(max_length=255, null=True)
 
 
 class Location(models.Model):
-    name = models.CharField(max_length=255)
+    city_name = models.CharField(max_length=255)
     gps_latitude = models.BigIntegerField(null=True)
     gps_longitude = models.BigIntegerField(null=True)
+
+    def __str__(self):
+        return self.city_name
 
 
 class Company(models.Model):
