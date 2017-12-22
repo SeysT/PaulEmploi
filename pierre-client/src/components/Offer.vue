@@ -35,7 +35,7 @@
       },
       methods: {
         get_offer: function (id) {
-          let url = 'offers/' + id
+          let url = 'offers/' + id + '/'
           this.$http.get(url).then(function (data) {
             this.title = data.body.title
             this.company = data.body.company

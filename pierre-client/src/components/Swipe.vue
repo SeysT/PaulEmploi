@@ -19,10 +19,10 @@
     },
     methods: {
       get_offers_ids: function () {
-        let url = 'users/' + '2' + '/offers_to_show'
+        let url = 'profile/offers_to_show/'
         this.$http.get(url).then(function (data) {
           console.log(data)
-          this.offers_ids = data.body.map(offer => offer.id)
+          this.offers_ids = data.body.map(offer => offer.id.toString())
         })
       }
     },
