@@ -170,7 +170,7 @@ class Command(BaseCommand):
                         item_lat = offer.get('gpsLatitude')
                         item_long = offer.get('gpsLongitude')
                         item_obj, exists = Location.objects.get_or_create(
-                            name=item_name,
+                            city_name=item_name,
                             gps_latitude=item_lat,
                             gps_longitude=item_long
                         )
