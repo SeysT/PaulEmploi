@@ -9,12 +9,22 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username')
+        fields = ('username', 'email')
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    user = serializers.SlugRelatedField(read_only=True, slug_field='username')
+    user = UserSerializer(read_only=True)
 
     class Meta:
         model = Profile
-        fields = '__all__' # A modifier pour mettre les champs correspondant vraiment au profil utilisateur
+        fields = (
+            'user',
+            'desired_min_salary',
+            'desired_max_salary',
+            'desired_location',
+            'desired_contract',
+            'interests',
+            'degrees',
+            'skills',
+            'languages',
+        )

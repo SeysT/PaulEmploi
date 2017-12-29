@@ -34,14 +34,14 @@ class Profile(models.Model):
     accepted_offers = models.ManyToManyField(Offer, related_name='accepted_by')
     refused_offers = models.ManyToManyField(Offer, related_name='refused_by')
 
-    desired_location = models.ForeignKey(Location)
+    desired_location = models.ForeignKey(Location, null=True)
+    desired_contract = models.ForeignKey(Contract, null=True)
     interests = models.ManyToManyField(Interest)
     degrees = models.ManyToManyField(Degree)
     skills = models.ManyToManyField(Skill)
     languages = models.ManyToManyField(Language)
-    desired_min_salary = models.BigIntegerField()
-    desired_max_salary = models.BigIntegerField()
-    desired_contract = models.ForeignKey(Contract)
+    desired_min_salary = models.BigIntegerField(null=True)
+    desired_max_salary = models.BigIntegerField(null=True)
 
     @property
     def seen_offers(self):

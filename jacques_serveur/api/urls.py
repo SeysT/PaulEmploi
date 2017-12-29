@@ -1,12 +1,12 @@
 from rest_framework.routers import DefaultRouter
 
 from api.views.offer import OfferViewSet
-from api.views.user import UserViewSet
+from api.views.user import ProfileViewSet
 
 
 router = DefaultRouter()
 router.register(r'offers', OfferViewSet, base_name='offer')
-router.register(r'users', UserViewSet, base_name='user')
+router.register(r'profile', ProfileViewSet, base_name='profile')
 
 # urlpatterns = {
 #     url(r'^users/$', UserView.as_view()),
