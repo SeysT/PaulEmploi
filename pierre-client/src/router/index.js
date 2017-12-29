@@ -14,9 +14,12 @@ Vue.use(VueCookies)
 
 Vue.use(VueResource)
 Vue.http.options.root = 'http://germoon.nebulae.co/api/' // Si Django tourne en local : 'http://localhost:8000/api/'
-Vue.http.headers.common['Authorization'] = (
-  Vue.cookies.get('token') !== null ? 'Token ' + Vue.cookies.get('token') : undefined
-)
+Vue.http.interceptors.push(function (request, next) {
+  if (Vue.cookies.get('token') !== null) {
+    request.headers.set('Authorization', 'Token ' + Vue.cookies.get('token'))
+  }
+  next()
+})
 
 export default new VueRouter({
   routes: [
