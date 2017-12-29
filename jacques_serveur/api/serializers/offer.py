@@ -54,7 +54,7 @@ class OfferIdSerializer(serializers.ModelSerializer):
 class OfferSerializer(serializers.ModelSerializer):
     company = serializers.SlugRelatedField(read_only=True, slug_field='name')
     languages = LanguageSerializer(many=True, read_only=True)
-    location = serializers.SlugRelatedField(read_only=True, slug_field='name')
+    location = serializers.SlugRelatedField(read_only=True, slug_field='city_name')
     degrees = DegreeSerializer(many=True, read_only=True)
     contract_type = serializers.SlugRelatedField(read_only=True, slug_field='name')
 
