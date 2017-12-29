@@ -41,9 +41,9 @@ class Company(models.Model):
 
 class Formation(models.Model):
     name = models.CharField(max_length=255)
-    required_skills = models.ManyToManyField(Skill, null=True)
-    acquired_skills = models.ManyToManyField(Skill, null=True)
-    required_degree = models.ManyToManyField(Degree, null=True)
+    required_skills = models.ManyToManyField(Skill, related_name='required_skills')
+    acquired_skills = models.ManyToManyField(Skill, related_name='acquired_skills')
+    required_degrees = models.ManyToManyField(Degree, related_name='required_degrees')
     acquired_degree = models.ForeignKey(Degree, null=True)
     duration = models.CharField(max_length=255, null=True)
 
