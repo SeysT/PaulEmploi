@@ -5,15 +5,8 @@ from django.dispatch import receiver
 
 from rest_framework.authtoken.models import Token
 
-from api.models.offer import (
-    Offer,
-    Location,
-    Interest,
-    Degree,
-    Skill,
-    Language,
-    Contract
-)
+from api.models.offer import Offer
+from api.models.fields import Location, Interest, Degree, Skill, Language, Contract
 
 
 class Profile(models.Model):

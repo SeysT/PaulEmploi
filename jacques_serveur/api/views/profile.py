@@ -1,19 +1,20 @@
 import json
 
 from rest_framework import viewsets, status
-from rest_framework.decorators import list_route, detail_route
+from rest_framework.decorators import list_route
 from rest_framework.response import Response
 
-from api.models.offer import Contract, Location, Interest, Degree, Skill, Language
-from api.models.user import Profile
-from api.serializers.offer import OfferSerializer
-from api.serializers.user import ProfileSerializer
+from api.models.fields import Contract, Location, Interest, Degree, Skill, Language
+from api.models.profile import Profile
+from api.serializers.offer import OfferSerializer, OfferIdSerializer
+from api.serializers.profile import ProfileSerializer
 
 
 class ProfileViewSet(viewsets.ViewSet):
     serializer_class = ProfileSerializer
     queryset = Profile.objects.all()
 
+    # GET '/api/profile/'
     def list(self, request):
         try:
             profile = request.user.profile
@@ -21,6 +22,7 @@ class ProfileViewSet(viewsets.ViewSet):
             return Response({ 'detail': 'Not found.' }, status=status.HTTP_404_NOT_FOUND)
         return Response(self.serializer_class(profile).data)
 
+    # PUT '/api/profile/'
     def put(self, request):
         try:
             profile = request.user.profile
@@ -37,15 +39,19 @@ class ProfileViewSet(viewsets.ViewSet):
         profile.desired_location = Location.objects.get(city_name=body['desired_location'])
         profile.desired_contract = Contract.objects.get(name=body['desired_contract'])
 
+        profile.interests = Interest.objects.none()
         for item in body['interests']:
             item = Interest.objects.get(name=item)
             profile.interests.add(item)
+        profile.degrees = Degree.objects.none()
         for item in body['degrees']:
             item = Degree.objects.get(name=item)
             profile.degrees.add(item)
+        profile.skills = Skill.objects.none()
         for item in body['skills']:
             item = Skill.objects.get(name=item)
             profile.skills.add(item)
+        profile.languages = Language.objects.none()
         for item in body['languages']:
             item = Language.objects.get(name=item)
             profile.languages.add(item)
@@ -56,6 +62,7 @@ class ProfileViewSet(viewsets.ViewSet):
         profile.save()
         return Response(self.serializer_class(profile).data)
 
+    # GET '/api/profile/accepted_offers/'
     @list_route(methods=['get'])
     def accepted_offers(self, request):
         try:
@@ -66,6 +73,7 @@ class ProfileViewSet(viewsets.ViewSet):
         serializer = OfferSerializer(accepted_offers, many=True)
         return Response(serializer.data)
 
+    # GET '/api/profile/offers_to_show/'
     @list_route(methods=['get'])
     def offers_to_show(self, request):
         try:

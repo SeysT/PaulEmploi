@@ -9,25 +9,25 @@
       <p>
         Interests :
         <select v-model="interests" multiple>
-          <option v-for="interest in available.interests">{{ interest }}</option>
+          <option v-for="interest in available_interests">{{ interest }}</option>
         </select>
       </p>
       <p>
         Degrees :
         <select v-model="degrees" multiple>
-          <option v-for="degree in available.degrees">{{ degree }}</option>
+          <option v-for="degree in available_degrees">{{ degree }}</option>
         </select>
       </p>
       <p>
         Skills :
         <select v-model="skills" multiple>
-          <option v-for="skill in available.skills">{{ skill }}</option>
+          <option v-for="skill in available_skills">{{ skill }}</option>
         </select>
       </p>
       <p>
         Languages :
         <select v-model="languages" multiple>
-          <option v-for="language in available.languages">{{ language }}</option>
+          <option v-for="language in available_languages">{{ language }}</option>
         </select>
       </p>
       <p>
@@ -41,7 +41,7 @@
       <p>
         Contract type :
         <select v-model="contract">
-          <option v-for="contract in available.contracts">{{ contract }}</option>
+          <option v-for="contract in available_contracts">{{ contract }}</option>
         </select>
       </p>
       <button v-on:click.prevent="save_profile()">Save</button>
@@ -54,15 +54,12 @@
     name: 'profile',
     data () {
       return {
-        // TODO: Charger available en fonction de ce qu'il y a dans la BDD (faire une route)
-        available: {
-          interests: ['informatique', 'électronique', 'mathématiques'],
-          degrees: ['CAP', 'Bac', 'Bac+2', 'Bac+3', 'Bac+4', 'Bac+5'],
-          skills: ['back-end', 'front-end', 'devops', 'data science'],
-          languages: ['Français', 'Anglais'],
-          contracts: ['CDI', 'CDD', 'Stage']
-        },
-        location: '',
+        available_interests: [],
+        available_degrees: [],
+        available_skills: [],
+        available_languages: [],
+        available_contracts: [],
+        location: 'Paris',
         interests: [],
         degrees: [],
         skills: [],
@@ -73,10 +70,19 @@
       }
     },
     methods: {
+      get_available: function () {
+        let url = 'fields/'
+        this.$http.get(url).then(function (data) {
+          this.available_interests = data.body.interests_names
+          this.available_degrees = data.body.degrees_names
+          this.available_skills = data.body.skills_names
+          this.available_languages = data.body.languages_names
+          this.available_contracts = data.body.contract_types_names
+        })
+      },
       get_profile: function () {
         let url = 'profile/'
         this.$http.get(url).then(function (data) {
-          console.log(data)
           this.location = data.body.desired_location
           this.interests = data.body.interests
           this.degrees = data.body.degrees
@@ -103,6 +109,7 @@
       }
     },
     created: function () {
+      this.get_available()
       this.get_profile()
     }
   }

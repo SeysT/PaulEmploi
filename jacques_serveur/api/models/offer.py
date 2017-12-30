@@ -1,51 +1,12 @@
 from django.db import models
 
-
-class Degree(models.Model):
-    name = models.CharField(max_length=255, null=True)
-
-
-class Skill(models.Model):
-    name = models.CharField(max_length=255, null=True)
-
-
-class Interest(models.Model):
-    name = models.CharField(max_length=255)
-
-
-class Language(models.Model):
-    name = models.CharField(max_length=255, null=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Contract(models.Model):
-    name = models.CharField(max_length=255, null=True)
-
-
-class Location(models.Model):
-    city_name = models.CharField(max_length=255)
-    gps_latitude = models.BigIntegerField(null=True)
-    gps_longitude = models.BigIntegerField(null=True)
-
-    def __str__(self):
-        return self.city_name
+from api.models.fields import Degree, Skill, Language, Contract, Location
 
 
 class Company(models.Model):
     name = models.CharField(max_length=255)
     url = models.CharField(max_length=255, null=True)
     description = models.CharField(max_length=1000, null=True)
-
-
-class Formation(models.Model):
-    name = models.CharField(max_length=255)
-    required_skills = models.ManyToManyField(Skill, related_name='required_skills')
-    acquired_skills = models.ManyToManyField(Skill, related_name='acquired_skills')
-    required_degrees = models.ManyToManyField(Degree, related_name='required_degrees')
-    acquired_degree = models.ForeignKey(Degree, null=True)
-    duration = models.CharField(max_length=255, null=True)
 
 
 class Offer(models.Model):

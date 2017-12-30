@@ -1,17 +1,9 @@
-from api.models.offer import (
-    Degree,
-    Skill,
-    Language,
-    Contract,
-    Location,
-    Company,
-    Offer,
-)
-from api.models.user import Profile
-
+from api.models.fields import Degree, Skill, Language, Contract, Location
+from api.models.formation import Formation
+from api.models.offer import Company, Offer
+from api.models.profile import Profile
 
 __all__ = [
-    'Bucketlist',
     'Degree',
     'Skill',
     'Language',
@@ -20,4 +12,5 @@ __all__ = [
     'Company',
     'Offer',
     'Profile',
+    'Formation'
 ]
