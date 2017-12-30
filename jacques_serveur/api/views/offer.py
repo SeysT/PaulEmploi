@@ -23,8 +23,8 @@ class OfferViewSet(viewsets.ReadOnlyModelViewSet):
         serializer = OfferExpandSerializer(offer)
         return Response(serializer.data)
 
-    # GET '/api/offers/pk/accept/'
-    @detail_route(methods=['get'])
+    # POST '/api/offers/pk/accept/'
+    @detail_route(methods=['post'])
     def accept(self, request, pk=None):
         if pk is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
@@ -44,8 +44,8 @@ class OfferViewSet(viewsets.ReadOnlyModelViewSet):
             )
         return Response({'result': 'Success'})
 
-    # GET '/api/offers/pk/refuse/'
-    @detail_route(methods=['get'])
+    # POST '/api/offers/pk/refuse/'
+    @detail_route(methods=['post'])
     def refuse(self, request, pk=None):
         if pk is None:
             return Response(status=status.HTTP_404_NOT_FOUND)

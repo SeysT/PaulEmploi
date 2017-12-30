@@ -28,14 +28,14 @@
       },
       like: function () {
         let url = 'offers/' + this.offers_ids[0] + '/accept/'
-        this.$http.get(url).then(function (data) {
+        this.$http.post(url).then(function (data) {
           console.log(data)
         })
         this.offers_ids.shift()
       },
       dislike: function () {
         let url = 'offers/' + this.offers_ids[0] + '/refuse/'
-        this.$http.get(url).then(function (data) {
+        this.$http.post(url).then(function (data) {
           console.log(data)
         })
         this.offers_ids.shift()
