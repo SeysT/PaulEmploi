@@ -2,8 +2,6 @@ from django.contrib.auth.models import User
 
 from rest_framework import serializers
 
-from api.models import Location, Contract
-from api.models.fields import Interest, Degree, Skill, Language
 from api.models.profile import Profile
 
 
