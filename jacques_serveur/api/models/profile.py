@@ -2,11 +2,11 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
 from rest_framework.authtoken.models import Token
 
 from api.models.offer import Offer
 from api.models.fields import Location, Interest, Degree, Skill, Language, Contract
+from api.management.offer_selector import OfferSelector
 
 
 class Profile(models.Model):
@@ -43,8 +43,9 @@ class Profile(models.Model):
 
     @property
     def offers_to_show(self):
-        """Return all offers we might want to show to the user"""
-        return Offer.objects.difference(self.seen_offers.all())
+        """Return a list of all offers ids we might want to show to the user"""
+        offer_selector = OfferSelector(self, Offer.objects.difference(self.seen_offers.all()))
+        return offer_selector.get_interesting_offers()
 
     def accept_offer(self, offer):
         """This function wrapps the add function of accepted_offers attributes"""
