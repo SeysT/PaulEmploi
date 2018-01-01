@@ -81,6 +81,5 @@ class ProfileViewSet(viewsets.ViewSet):
         except Profile.DoesNotExist:
             return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
         offers_to_show = profile.offers_to_show
-        serializer = OfferIdSerializer(offers_to_show, many=True)
-        return Response(serializer.data)
+        return Response(offers_to_show)
 

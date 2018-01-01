@@ -41,21 +41,3 @@ class OfferSelector:
         ordered_offers_ids = [offer[0] for offer in offers][:max_number] if max_number != None \
             else [offer[0] for offer in offers]
         return ordered_offers_ids
-
-        # # Stocking interesting offers in a ordered list 'offers' where the
-        # # elements of this list are tuples (offer, score)
-        # offers = [
-        #     (offer, self.compute_score(offer))
-        #     for offer in self.available_offers
-        #     if self.compute_score(offer) >= 5
-        # ]
-        # offers.sort(key=lambda offer_tuple: offer_tuple[1])
-        # offer_ordered_pk = [liste[0].pk for liste in offers][:max_number] if max_number != None \
-        #     else [liste[0].pk for liste in offers]
-        #
-        # # defining a query object that contains all the interesting offers sorted
-        # clauses = ' '.join(['WHEN id=%s THEN %s' % (pk, i) for i, pk in enumerate(offer_ordered_pk)])
-        # ordering = 'CASE %s END' % clauses
-        # interesting_offers = Offer.objects.filter(pk__in=pk_list).extra(
-        #     select={'ordering': ordering}, order_by=('ordering',))
-        # return interesting_offers
