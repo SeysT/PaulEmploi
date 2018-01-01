@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from api.models.fields import Contract, Location, Interest, Degree, Skill, Language
 from api.models.profile import Profile
-from api.serializers.offer import OfferSerializer, OfferIdSerializer
+from api.serializers.offer import OfferSerializer
 from api.serializers.profile import ProfileSerializer
 
 
