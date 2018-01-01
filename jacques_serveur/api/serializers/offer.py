@@ -1,41 +1,7 @@
 from rest_framework import serializers
 
-from api.models.offer import Degree, Skill, Language, Contract, Location, Company, Offer
-
-
-class DegreeSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Degree
-        fields = '__all__'
-
-
-class LanguageSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Language
-        fields = '__all__'
-
-
-class SkillSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Skill
-        fields = '__all__'
-
-
-class ContractSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Contract
-        fields = '__all__'
-
-
-class LocationSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Location
-        fields = '__all__'
+from api.models.offer import Offer, Company
+from api.serializers.fields import LocationSerializer, DegreeSerializer, SkillSerializer, LanguageSerializer
 
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -50,6 +16,7 @@ class OfferIdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Offer
         fields = ('id',)
+
 
 class OfferSerializer(serializers.ModelSerializer):
     company = serializers.SlugRelatedField(read_only=True, slug_field='name')

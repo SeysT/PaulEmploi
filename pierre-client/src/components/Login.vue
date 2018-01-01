@@ -21,10 +21,10 @@
       login: function () {
         this.$http.post(
           'http://localhost:8000/auth/get-token/',
-           {username: this.$data.username, password: this.$data.password}
+           { username: this.$data.username, password: this.$data.password }
         ).then(function (data) {
           this.$cookies.set('token', data.body.token)
-          this.$router.push({path: '/swipe'})
+          this.$router.push({ path: '/swipe' })
         })
       }
     }

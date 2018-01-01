@@ -3,7 +3,7 @@ from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 
 from api.models.offer import Offer
-from api.models.user import AlreadySeenOfferException
+from api.models.profile import AlreadySeenOfferException
 from api.serializers.offer import OfferSerializer, OfferExpandSerializer
 
 
@@ -11,6 +11,7 @@ class OfferViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = OfferSerializer
     queryset = Offer.objects.all()
 
+    # GET '/api/offers/pk/expand/'
     @detail_route(methods=['get'])
     def expand(self, request, pk=None):
         if pk is None:
@@ -22,6 +23,7 @@ class OfferViewSet(viewsets.ReadOnlyModelViewSet):
         serializer = OfferExpandSerializer(offer)
         return Response(serializer.data)
 
+    # GET '/api/offers/pk/accept/'
     @detail_route(methods=['get'])
     def accept(self, request, pk=None):
         if pk is None:
@@ -42,6 +44,7 @@ class OfferViewSet(viewsets.ReadOnlyModelViewSet):
             )
         return Response({'result': 'Success'})
 
+    # GET '/api/offers/pk/refuse/'
     @detail_route(methods=['get'])
     def refuse(self, request, pk=None):
         if pk is None:
