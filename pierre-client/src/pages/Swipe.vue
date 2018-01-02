@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Navbar :title="title"></Navbar>
     <Card v-for="id in offers_ids" :offer_id="id" :key="id"></Card>
     <button v-on:click.prevent="like()">Like</button>
     <button v-on:click.prevent="dislike()">Dislike</button>
@@ -7,15 +8,18 @@
 </template>
 
 <script>
-  import Card from './Card.vue'
+  import Card from '../components/Card.vue'
+  import Navbar from '../components/Navbar.vue'
 
   export default {
-    name: 'swipe',
+    name: 'Swipe',
     components: {
-      Card
+      Card,
+      Navbar
     },
     data () {
       return {
+        title: 'Swipe',
         offers_ids: ['1', '2', '3']
       }
     },

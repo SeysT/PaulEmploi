@@ -1,18 +1,27 @@
 <template>
-  <form>
-    Username: <br>
-    <input type='text' name='username' v-model='username'><br>
-    Password: <br>
-    <input type='password' name='password' v-model='password'><br><br>
-    <input type='submit' name='submit' v-on:click.prevent='login()'>
-  </form>
+  <div>
+    <Navbar :title="title"></Navbar>
+    <form>
+      Username: <br>
+      <input type='text' name='username' v-model='username'><br>
+      Password: <br>
+      <input type='password' name='password' v-model='password'><br><br>
+      <input type='submit' name='submit' v-on:click.prevent='login()'>
+    </form>
+  </div>
 </template>
 
 <script>
+  import Navbar from '../components/Navbar.vue'
+
   export default {
-    name: 'login',
+    name: 'Login',
+    components: {
+      Navbar
+    },
     data () {
       return {
+        title: 'Login',
         username: '',
         password: ''
       }

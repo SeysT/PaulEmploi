@@ -31,6 +31,13 @@ class OfferSerializer(serializers.ModelSerializer):
                 'creation_date')
 
 
+class OfferIdSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Offer
+        fields = ('id',)
+
+
 class OfferExpandSerializer(OfferSerializer):
     skills = SkillSerializer(many=True, read_only=True)
     company = CompanySerializer(read_only=True)

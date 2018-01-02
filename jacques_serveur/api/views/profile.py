@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from api.models.fields import Contract, Location, Interest, Degree, Skill, Language
 from api.models.profile import Profile
-from api.serializers.offer import OfferSerializer
+from api.serializers.offer import OfferIdSerializer
 from api.serializers.profile import ProfileSerializer
 
 
@@ -70,7 +70,7 @@ class ProfileViewSet(viewsets.ViewSet):
         except Profile.DoesNotExist:
             return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
         accepted_offers = profile.accepted_offers
-        serializer = OfferSerializer(accepted_offers, many=True)
+        serializer = OfferIdSerializer(accepted_offers, many=True)
         return Response(serializer.data)
 
     # GET '/api/profile/offers_to_show/'
