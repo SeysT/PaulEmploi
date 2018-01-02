@@ -4,9 +4,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
-from api.models.offer import Offer
 from api.models.fields import Location, Interest, Degree, Skill, Language, Contract
-from api.management.offer_selector import OfferSelector
+from api.models.offer import Offer
+from api.utils.offer_selector import OfferSelector
 
 
 class Profile(models.Model):
