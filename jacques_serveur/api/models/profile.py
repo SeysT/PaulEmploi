@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+from api.models.formation import Formation
 from api.models.fields import Location, Interest, Degree, Skill, Language, Contract
 from api.models.offer import Offer
 from api.utils.offer_selector import OfferSelector
@@ -26,6 +27,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     accepted_offers = models.ManyToManyField(Offer, related_name='accepted_by')
     refused_offers = models.ManyToManyField(Offer, related_name='refused_by')
+    kept_formations = models.ManyToManyField(Formation, related_name='kept_by')
+    dropped_formations = models.ManyToManyField(Formation, related_name='dropped_by')
 
     desired_location = models.ForeignKey(Location, null=True)
     desired_contract = models.ForeignKey(Contract, null=True)
@@ -48,41 +51,58 @@ class Profile(models.Model):
         return offer_selector.get_interesting_offers()
 
     def accept_offer(self, offer):
-        """This function wrapps the add function of accepted_offers attributes"""
+        """This function wraps the add function of accepted_offers attribute"""
         self._check_offer(offer)
         self.accepted_offers.add(offer)
 
     def refuse_offer(self, offer):
-        """This function wrapps the add function of refused_offers attributes"""
+        """This function wraps the add function of refused_offers attribute"""
         self._check_offer(offer)
         self.refused_offers.add(offer)
 
     def _check_offer(self, offer):
         """This function raise an exception if the given offer has already been seen by the user"""
         if offer in self.accepted_offers.all():
-            raise AlreadyAcceptedOfferException
+            raise AlreadyAcceptedCardException
         elif offer in self.refused_offers.all():
-            raise AlreadyRefusedOfferException
+            raise AlreadyRefusedCardException
+
+    def keep_formation(self, formation):
+        """This function wraps the add function of kept_formations attribute"""
+        self._check_formation(formation)
+        self.kept_formations.add(formation)
+
+    def drop_formation(self, formation):
+        """This function wraps the add function of kept_formations attribute"""
+        self._check_formation(formation)
+        self.dropped_formations.add(formation)
+
+    def _check_formation(self, formation):
+        """This function raise an exception if the given formation has already been seen by the user"""
+        if formation in self.kept_formations.all():
+            raise AlreadyAcceptedCardException
+        elif formation in self.dropped_formations.all():
+            raise AlreadyRefusedCardException
 
 
-class AlreadySeenOfferException(Exception):
+class AlreadySeenCardException(Exception):
     """This exception can be raised when we detect the user has already seen a given offer."""
-    def __init__(self, message='This offer has already been seen for this user.'):
+    def __init__(self, message='This card has already been seen for this user.'):
         self.message = message
 
     def __str__(self):
         return self.message
 
 
-class AlreadyAcceptedOfferException(AlreadySeenOfferException):
+class AlreadyAcceptedCardException(AlreadySeenCardException):
     """This exception can be raised when we detect the user has already accepted a given offer."""
-    def __init__(self, message='This offer has already been accepted for this user.'):
+    def __init__(self, message='This card has already been accepted for this user.'):
         self.message = message
 
 
-class AlreadyRefusedOfferException(AlreadySeenOfferException):
+class AlreadyRefusedCardException(AlreadySeenCardException):
     """This exception can be raised when we detect the user has already refused a given offer."""
-    def __init__(self, message='This offer has already been refused for this user.'):
+    def __init__(self, message='This card has already been refused for this user.'):
         self.message = message
 
 

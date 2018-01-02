@@ -1,6 +1,6 @@
 from django.db import models
 
-from api.models.fields import Degree, Skill
+from api.models.fields import Degree, Skill, Location, Language
 
 
 class Formation(models.Model):
@@ -10,3 +10,5 @@ class Formation(models.Model):
     required_degrees = models.ManyToManyField(Degree, related_name='required_degrees')
     acquired_degree = models.ForeignKey(Degree, null=True)
     duration = models.CharField(max_length=255, null=True)
+    location = models.ForeignKey(Location, null=True)
+    language = models.ForeignKey(Language, null=True)

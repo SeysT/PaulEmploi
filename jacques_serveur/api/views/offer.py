@@ -3,13 +3,19 @@ from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 
 from api.models.offer import Offer
-from api.models.profile import AlreadySeenOfferException
+from api.models.profile import AlreadySeenCardException
 from api.serializers.offer import OfferSerializer, OfferExpandSerializer
 
 
 class OfferViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = OfferSerializer
     queryset = Offer.objects.all()
+
+    # GET '/api/offers/'
+    # Affiche la liste de toutes les offres
+
+    # GET '/api/offers/pk/'
+    # Affiche l'offre correspondante
 
     # GET '/api/offers/pk/expand/'
     @detail_route(methods=['get'])
@@ -37,7 +43,7 @@ class OfferViewSet(viewsets.ReadOnlyModelViewSet):
             )
         try:
             request.user.profile.accept_offer(offer)
-        except AlreadySeenOfferException as exception:
+        except AlreadySeenCardException as exception:
             return Response(
                 {'result': 'Error', 'detail': exception.message},
                 status=status.HTTP_400_BAD_REQUEST
@@ -58,7 +64,7 @@ class OfferViewSet(viewsets.ReadOnlyModelViewSet):
             )
         try:
             request.user.profile.refuse_offer(offer)
-        except AlreadySeenOfferException as exception:
+        except AlreadySeenCardException as exception:
             return Response(
                 {'result': 'Error', 'detail': exception.message},
                 status=status.HTTP_400_BAD_REQUEST
