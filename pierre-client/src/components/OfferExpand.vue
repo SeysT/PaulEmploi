@@ -31,14 +31,14 @@
     },
     methods: {
       get_expanded_offer: function (id) {
-        let url = 'offers/' + id + '/expand/'
-        this.$http.get(url).then(function (data) {
-          this.company_description = data.body.company.description
-          this.website = data.body.company.url
-          this.skill = data.body.skill
-          this.offer_description = data.body.description
-          this.weekly_work_time = data.body.weekly_work_time
-          this.experience_name = data.body.experience_name
+        let url = 'api/offers/' + id + '/expand/'
+        this.$http.get(url).then(function (resp) {
+          this.company_description = resp.body.company.description
+          this.website = resp.body.company.url
+          this.skill = resp.body.skill
+          this.offer_description = resp.body.description
+          this.weekly_work_time = resp.body.weekly_work_time
+          this.experience_name = resp.body.experience_name
         })
       }
     },

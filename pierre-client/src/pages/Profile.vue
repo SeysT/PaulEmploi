@@ -81,30 +81,30 @@
         this.$router.push({ path: '/profile/my_offers' })
       },
       get_available: function () {
-        let url = 'fields/'
-        this.$http.get(url).then(function (data) {
-          this.available_interests = data.body.interests_names
-          this.available_degrees = data.body.degrees_names
-          this.available_skills = data.body.skills_names
-          this.available_languages = data.body.languages_names
-          this.available_contracts = data.body.contract_types_names
+        let url = 'api/fields/'
+        this.$http.get(url).then(function (resp) {
+          this.available_interests = resp.body.interests_names
+          this.available_degrees = resp.body.degrees_names
+          this.available_skills = resp.body.skills_names
+          this.available_languages = resp.body.languages_names
+          this.available_contracts = resp.body.contract_types_names
         })
       },
       get_profile: function () {
-        let url = 'profile/'
-        this.$http.get(url).then(function (data) {
-          this.location = data.body.desired_location
-          this.interests = data.body.interests
-          this.degrees = data.body.degrees
-          this.skills = data.body.skills
-          this.languages = data.body.languages
-          this.min_salary = data.body.desired_min_salary
-          this.max_salary = data.body.desired_max_salary
-          this.contract = data.body.desired_contract
+        let url = 'api/profile/'
+        this.$http.get(url).then(function (resp) {
+          this.location = resp.body.desired_location
+          this.interests = resp.body.interests
+          this.degrees = resp.body.degrees
+          this.skills = resp.body.skills
+          this.languages = resp.body.languages
+          this.min_salary = resp.body.desired_min_salary
+          this.max_salary = resp.body.desired_max_salary
+          this.contract = resp.body.desired_contract
         })
       },
       save_profile: function () {
-        let url = 'profile/'
+        let url = 'api/profile/'
         let body = {
           desired_location: this.location,
           desired_contract: this.contract,
