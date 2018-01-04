@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isExpanded">
+    <div v-if="!isExpanded">
       <button disabled>Gauche</button>
       <Offer :offer_id="offer_id"></Offer>
       <button v-on:click.prevent="toggle()">Droite</button>
@@ -18,7 +18,7 @@
   import OfferExpand from './OfferExpand.vue'
 
   export default {
-    name: 'card',
+    name: 'Card',
     components: {
       Offer,
       OfferExpand

@@ -4,9 +4,11 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import VueCookies from 'vue-cookies'
 
-import Swipe from '@/components/Swipe'
-import Login from '@/components/Login'
-import Profile from '@/components/Profile'
+import Swipe from '@/pages/Swipe'
+import Login from '@/pages/Login'
+import Profile from '@/pages/Profile'
+import Home from '@/pages/Home'
+import MyOffers from '@/pages/MyOffers'
 
 Vue.use(VueRouter)
 
@@ -24,6 +26,11 @@ Vue.http.interceptors.push(function (request, next) {
 export default new VueRouter({
   routes: [
     {
+      path: '/',
+      name: 'Home',
+      component: Home
+    },
+    {
       path: '/swipe',
       name: 'Swipe',
       component: Swipe
@@ -37,6 +44,11 @@ export default new VueRouter({
       path: '/profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/profile/my_offers',
+      name: 'MyOffers',
+      component: MyOffers
     }
   ]
 })

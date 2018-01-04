@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>Profile</h1>
+    <Navbar :title="title"></Navbar>
+    <button v-on:click.prevent="my_offers()">My Offers</button>
     <form>
       <p>
         Location :
@@ -50,10 +51,16 @@
 </template>
 
 <script>
+  import Navbar from '../components/Navbar.vue'
+
   export default {
-    name: 'profile',
+    name: 'Profile',
+    components: {
+      Navbar
+    },
     data () {
       return {
+        title: 'Profile',
         available_interests: [],
         available_degrees: [],
         available_skills: [],
@@ -70,6 +77,9 @@
       }
     },
     methods: {
+      my_offers: function () {
+        this.$router.push({ path: '/profile/my_offers' })
+      },
       get_available: function () {
         let url = 'fields/'
         this.$http.get(url).then(function (data) {
