@@ -78,7 +78,7 @@
     },
     methods: {
       my_offers: function () {
-        this.$router.push({ path: '/profile/my_offers' })
+        this.$router.push({ name: 'MyOffers' })
       },
       get_available: function () {
         let url = 'api/fields/'

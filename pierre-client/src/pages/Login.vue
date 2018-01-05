@@ -37,10 +37,12 @@
         }
       },
       login: function () {
-        this.$http.post(
-          'auth/get-token/',
-           { username: this.$data.username, password: this.$data.password }
-        ).then(function (resp) {
+        let url = 'auth/get-token/'
+        let body = {
+          username: this.$data.username,
+          password: this.$data.password
+        }
+        this.$http.post(url, body).then(function (resp) {
           this.$cookies.set('token', resp.body.token)
           if (this.redirected) {
             this.$router.go(-1)

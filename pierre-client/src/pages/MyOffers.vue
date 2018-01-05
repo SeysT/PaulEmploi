@@ -19,9 +19,9 @@
     },
     methods: {
       get_my_ids: function () {
-        let url = 'profile/accepted_offers'
-        this.$http.get(url).then(function (data) {
-          this.my_ids = data.body.map(offer => offer.id.toString())
+        let url = 'api/profile/accepted_offers'
+        this.$http.get(url).then(function (resp) {
+          this.my_ids = resp.body.map(offer => offer.id.toString())
         })
       }
     },
