@@ -1,10 +1,25 @@
 <template>
-  <div>
+<<<<<<< HEAD:pierre-client/src/pages/Swipe.vue
+=======
+  <div class="wrap">
     <Navbar :title="title"></Navbar>
-    <Card v-for="id in offers_ids" :offer_id="id" :key="id"></Card>
-    <button v-on:click.prevent="like()">Like</button>
-    <button v-on:click.prevent="dislike()">Dislike</button>
-  </div>
+    <div v-show="active = offers_ids[0]" class="cards">
+      <Card v-for="id in offers_ids" 
+          :offer_id="id" 
+          :key="id"
+          class="cards_item"
+          :class="{
+            'cards_item--active': active == id,
+          }"
+          v-touch:swipeleft="dislike" >
+      </Card>  
+    </div>
+    <div class="actions"> 
+      <button class="button dislike" v-on:click.prevent="dislike"></button>
+      <button class="button like" v-on:click.prevent="like"></button>
+    </div>  
+  </div> 
+>>>>>>> css added for the cards:pierre-client/src/components/Swipe.vue
 </template>
 
 <script>
@@ -19,13 +34,18 @@
     },
     data () {
       return {
+<<<<<<< HEAD:pierre-client/src/pages/Swipe.vue
         title: 'Swipe',
         offers_ids: ['1', '2', '3']
+=======
+        offers_ids: ['1', '2', '3', '4', '5', '6']
+>>>>>>> css added for the cards:pierre-client/src/components/Swipe.vue
       }
     },
     methods: {
       get_offers_ids: function () {
-        let url = 'profile/offers_to_show/'
+        let url = 'api/offers/'
+        // let url = 'profile/offers_to_show/'
         this.$http.get(url).then(function (data) {
           this.offers_ids = data.body.map(offer => offer.id.toString())
         })
@@ -52,5 +72,81 @@
 </script>
 
 <style scoped>
+.wrap{
+  width: 100%;
+  height: 100%;
+  max-width: 320px;
+  padding: 0 16px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}  
+.cards{
+  position: relative;
+  padding: 0;
+  margin: 0;
+  height: 450px;
+
+  list-style-type: none;
+}
+.cards_item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  height: 450px;
+  padding: 1px 15px;
+  overflow: auto;
+
+  border: 2px solid #96b7ff;
+  border-radius: 4px;
+  background-color: #eff4ff;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(24px) scale(.94);
+  /* pointer-events: none;  */
+}
+.cards_item--active {
+  z-index: 10;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  visibility: visible;
+  transition: all .4s .1s cubic-bezier(.87,-.41,.19,1.44);
+}
+
+.actions{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 15px;
+}
+.button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+  display: block;
+  width: 63px;
+  height: 63px;
+
+  background-color: white;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 0;
+  outline: 0;
+
+  transition: all .3s;
+}
+.like {
+  background-image: url(../assets/like.png);
+  }
+.dislike{
+  background-image: url(../assets/dislike.png);
+  }
+
 
 </style>
