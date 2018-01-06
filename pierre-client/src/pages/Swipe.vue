@@ -1,9 +1,10 @@
 <template>
-<<<<<<< HEAD:pierre-client/src/pages/Swipe.vue
-=======
   <div class="wrap">
     <Navbar :title="title"></Navbar>
-    <div v-show="active = offers_ids[0]" class="cards">
+    <div v-show="active = offers_ids[0]" 
+         v-touch:swipeleft="dislike"
+         v-touch:swiperight="like"
+         class="cards">
       <Card v-for="id in offers_ids" 
           :offer_id="id" 
           :key="id"
@@ -19,7 +20,6 @@
       <button class="button like" v-on:click.prevent="like"></button>
     </div>  
   </div> 
->>>>>>> css added for the cards:pierre-client/src/components/Swipe.vue
 </template>
 
 <script>
@@ -34,12 +34,8 @@
     },
     data () {
       return {
-<<<<<<< HEAD:pierre-client/src/pages/Swipe.vue
         title: 'Swipe',
         offers_ids: ['1', '2', '3']
-=======
-        offers_ids: ['1', '2', '3', '4', '5', '6']
->>>>>>> css added for the cards:pierre-client/src/components/Swipe.vue
       }
     },
     methods: {
@@ -138,6 +134,7 @@
   background-position: center;
   border: 0;
   outline: 0;
+  cursor: pointer;
 
   transition: all .3s;
 }

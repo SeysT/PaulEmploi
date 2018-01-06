@@ -1,14 +1,12 @@
 <template>
   <div>
     <div v-if="!isExpanded">
-      <button disabled>Gauche</button>
       <Offer :offer_id="offer_id"></Offer>
-      <button v-on:click.prevent="toggle()">Droite</button>
+      <button v-on:click.prevent="toggle()" class="button details"></button>
     </div>
     <div v-else>
-      <button v-on:click.prevent="toggle()">Gauche</button>
       <OfferExpand :offer_id="offer_id"></OfferExpand>
-      <button disabled>Droite</button>
+      <button v-on:click.prevent="toggle()" class="button back"></button>
     </div>
   </div>
 </template>
@@ -43,5 +41,29 @@
 </script>
 
 <style scoped>
+.button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+  display: block;
+  width: 35px;
+  height: 35px;
+  margin: 0 auto;
 
+  background-color:#eff4ff;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  /* transition: all .3s; */
+}
+.details {
+  background-image: url(../assets/question.png);
+  }
+.back{
+  background-image: url(../assets/back.png);
+}  
 </style>
