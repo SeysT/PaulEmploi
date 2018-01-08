@@ -40,8 +40,7 @@
     },
     methods: {
       get_offers_ids: function () {
-        let url = 'api/offers/'
-        // let url = 'profile/offers_to_show/'
+        let url = 'profile/offers_to_show/'
         this.$http.get(url).then(function (data) {
           this.offers_ids = data.body.map(offer => offer.id.toString())
         })
@@ -90,25 +89,20 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 10;
+  width: 100%;
 
   height: 450px;
-  padding: 1px 15px;
   overflow: auto;
 
   border: 2px solid #96b7ff;
   border-radius: 4px;
   background-color: #eff4ff;
 
-  opacity: 0;
   visibility: hidden;
-  transform: translateY(24px) scale(.94);
-  /* pointer-events: none;  */
+
 }
 .cards_item--active {
-  z-index: 10;
-  transform: translateY(0) scale(1);
-  opacity: 1;
+  z-index: 1;
   visibility: visible;
   transition: all .4s .1s cubic-bezier(.87,-.41,.19,1.44);
 }

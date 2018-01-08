@@ -3,6 +3,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import VueCookies from 'vue-cookies'
+import VueTouch from 'vue-touch'
 
 import Swipe from '@/pages/Swipe'
 import Login from '@/pages/Login'
@@ -11,11 +12,12 @@ import Home from '@/pages/Home'
 import MyOffers from '@/pages/MyOffers'
 
 Vue.use(VueRouter)
+Vue.use(VueTouch, {name: 'v-touch'})
 
 Vue.use(VueCookies)
 
 Vue.use(VueResource)
-Vue.http.options.root = 'http://localhost:8000/api/' // Si Django tourne en local : 'http://germoon.nebulae.co/api/'
+Vue.http.options.root = 'http://germoon.nebulae.co/api/' // Si Django tourne en local : 'http://localhost:8000/api/'
 Vue.http.interceptors.push(function (request, next) {
   if (Vue.cookies.get('token') !== null) {
     request.headers.set('Authorization', 'Token ' + Vue.cookies.get('token'))
@@ -23,8 +25,6 @@ Vue.http.interceptors.push(function (request, next) {
   next()
 })
 
-var VueTouch = require('vue-touch')
-Vue.use(VueTouch, {name: 'v-touch'})
 
 export default new VueRouter({
   routes: [
