@@ -15,3 +15,10 @@ class FormationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Formation
         fields = '__all__'
+
+
+class FormationIdSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Formation
+        fields = ('id',)
