@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div v-if="is_formation">
-      <Formation :formation_id="card_id"></Formation>
-    </div>
-    <div v-else>
+    <div v-if="!is_formation">
       <div v-if="!isExpanded">
         <Offer :offer_id="card_id"></Offer>
         <button v-on:click.prevent="toggle()" class="button details">Droite</button>
@@ -12,6 +9,9 @@
         <button v-on:click.prevent="toggle()" class="button back">Gauche</button>
         <OfferExpand :offer_id="card_id"></OfferExpand>
       </div>
+    </div>
+    <div v-else>
+      <Formation :formation_id="card_id"></Formation>
     </div>
   </div>
 </template>

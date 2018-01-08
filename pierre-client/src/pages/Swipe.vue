@@ -2,21 +2,20 @@
   <div class="container">
     <Navbar :title="title"></Navbar>
     <div class="wrap">
-      <div v-show="active = offers_ids[0]"
-          class="cards">
-        <Card v-for="card in cards"
-            :card_id="card.id"
-            :key="card.id.toString()+card.isFormation.toString()"
-            :is_formation="card.isFormation"
+      <div class="cards">
+        <Card v-for="card_id in cards_ids"
+            :card_id="card_id"
+            :key="card.toString()+isFormation.toString()"
+            :is_formation="isFormation"
             class="cards_item"
             :class="{
-              'cards_item--active': offers_ids[0] == id,
+              'cards_item--active': offers_ids[0] === id,
             }" >
         </Card>
       </div>
       <div class="actions">
-        <button class="button dislike" v-on:click.prevent="dislike()"></button>
-        <button class="button like" v-on:click.prevent="like()"></button>
+        <button class="button dislike" v-on:click.prevent="action(like=true)"></button>
+        <button class="button like" v-on:click.prevent="action(like=false)"></button>
       </div>
     </div>
   </div>
@@ -35,59 +34,43 @@
     data () {
       return {
         title: 'Swipe',
-        cards: [
-          {
-            id: '1',
-            isFormation: false
-          },
-          {
-            id: '2',
-            isFormation: false
-          },
-          {
-            id: '3',
-            isFormation: true
-          }
-        ]
+        cards_ids: ['1', '2', '3'],
+        isFormation: false
       }
     },
     methods: {
-      get_cards_ids: function () {
-        let url = 'profile/cards_to_show/'
+      get_ids: function (url) {
         this.$http.get(url).then(function (resp) {
-          this.cards = resp.body.map(function (card) {
-            return {
-              id: card.id.toString(),
-              isFormation: card.isFormation
-            }
-          })
+          this.cards_ids += resp.body.map(card => card.id.toString())
         })
       },
-      like: function () {
-        let card = this.cards[0]
-        let url = ''
-        if (card.isFormation) {
-          url = 'api/formations/' + card.id + '/keep/'
-        } else {
-          url = 'api/offers/' + card.id + '/accept/'
-        }
-        this.$http.post(url)
-        this.cards.shift()
+      get_offers_ids: function () {
+        let url = 'profile/offers_to_show/'
+        this.cards_ids = []
+        this.get_ids(url)
       },
-      dislike: function () {
-        let card = this.cards[0]
-        let url = ''
-        if (card.isFormation) {
-          url = 'api/formations/' + card.id + '/drop/'
-        } else {
-          url = 'api/offers/' + card.id + '/refuse/'
+      get_formations_ids: function () {
+        let url = 'profile/formations_to_show/'
+        this.get_ids(url)
+      },
+      action: function (like) {
+        let card_id = this.cards_ids[0]
+        let url_start = this.isFormation ? 'api/formations/' : 'api/offers/'
+        let url_end = this.isFormation
+          ? like
+            ? '/keep/' : '/drop/'
+          : like
+            ? '/accept/' : '/refuse/'
+        if (this.cards_ids.length === 1 && !this.isFormation) {
+          this.isFormation = true
+          this.get_formations_ids()
         }
-        this.$http.post(url)
-        this.cards.shift()
+        this.$http.post(url_start + card_id + url_end)
+        this.cards_ids.shift()
       }
     },
     created: function () {
-      this.get_cards_ids()
+      this.get_offers_ids()
     }
   }
 </script>
