@@ -12,6 +12,9 @@
               'cards_item--active': offers_ids[0] === id,
             }" >
         </Card>
+        <div class="cards_item">
+          <p class="background-text">No more cards to swipe!<br/><br/>But you're welcome to come back tomorrow! :)</p>
+        </div>
       </div>
       <div class="actions">
         <button class="button dislike" v-on:click.prevent="action(like=true)"></button>
@@ -45,18 +48,18 @@
         })
       },
       get_offers_ids: function () {
-        let url = 'profile/offers_to_show/'
+        let url = 'api/profile/offers_to_show/'
         this.cards_ids = []
         this.get_ids(url)
       },
       get_formations_ids: function () {
-        let url = 'profile/formations_to_show/'
+        let url = 'api/profile/formations_to_show/'
         this.get_ids(url)
       },
       action: function (like) {
-        let card_id = this.cards_ids[0]
-        let url_start = this.isFormation ? 'api/formations/' : 'api/offers/'
-        let url_end = this.isFormation
+        let cardId = this.cards_ids[0]
+        let urlStart = this.isFormation ? 'api/formations/' : 'api/offers/'
+        let urlEnd = this.isFormation
           ? like
             ? '/keep/' : '/drop/'
           : like
@@ -65,7 +68,7 @@
           this.isFormation = true
           this.get_formations_ids()
         }
-        this.$http.post(url_start + card_id + url_end)
+        this.$http.post(urlStart + cardId + urlEnd)
         this.cards_ids.shift()
       }
     },
@@ -86,6 +89,7 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
 .cards{
   position: relative;
   padding: 0;
@@ -94,6 +98,7 @@
 
   list-style-type: none;
 }
+
 .cards_item {
   position: absolute;
   top: 0;
@@ -108,20 +113,21 @@
   background-color: #eff4ff;
 
   visibility: hidden;
-
 }
+
 .cards_item--active {
   z-index: 1;
   visibility: visible;
   transition: all .4s .1s cubic-bezier(.87,-.41,.19,1.44);
 }
 
-.actions{
+.actions {
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 20px 15px;
 }
+
 .button {
   display: flex;
   justify-content: space-around;
@@ -141,12 +147,19 @@
 
   transition: all .3s;
 }
+
 .like {
   background-image: url(../assets/like.png);
-  }
-.dislike{
+}
+
+.dislike {
   background-image: url(../assets/dislike.png);
-  }
+}
 
-
+.background-text {
+  position: absolute;
+  top: 8em;
+  z-index: -12;
+  visibility: visible;
+}
 </style>
