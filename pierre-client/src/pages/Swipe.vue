@@ -2,22 +2,23 @@
   <div class="container">
     <Navbar :title="title"></Navbar>
     <div class="wrap">
-      <div v-show="active = offers_ids[0]" 
+      <div v-show="active = offers_ids[0]"
           class="cards">
-        <Card v-for="id in offers_ids" 
-            :offer_id="id" 
-            :key="id"
+        <Card v-for="card in cards"
+            :card_id="card.id"
+            :key="card.id.toString()+card.isFormation.toString()"
+            :is_formation="card.isFormation"
             class="cards_item"
             :class="{
               'cards_item--active': offers_ids[0] == id,
             }" >
-        </Card>  
+        </Card>
       </div>
-      <div class="actions"> 
-        <button class="button dislike" v-on:click.prevent="dislike"></button>
-        <button class="button like" v-on:click.prevent="like"></button>
-      </div>  
-    </div> 
+      <div class="actions">
+        <button class="button dislike" v-on:click.prevent="dislike()"></button>
+        <button class="button like" v-on:click.prevent="like()"></button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -34,29 +35,59 @@
     data () {
       return {
         title: 'Swipe',
-        offers_ids: ['1', '2', '3']
+        cards: [
+          {
+            id: '1',
+            isFormation: false
+          },
+          {
+            id: '2',
+            isFormation: false
+          },
+          {
+            id: '3',
+            isFormation: true
+          }
+        ]
       }
     },
     methods: {
-      get_offers_ids: function () {
-        let url = 'api/profile/offers_to_show/'
+      get_cards_ids: function () {
+        let url = 'profile/cards_to_show/'
         this.$http.get(url).then(function (resp) {
-          this.offers_ids = resp.body.map(offer => offer.id.toString())
+          this.cards = resp.body.map(function (card) {
+            return {
+              id: card.id.toString(),
+              isFormation: card.isFormation
+            }
+          })
         })
       },
       like: function () {
-        let url = 'api/offers/' + this.offers_ids[0] + '/accept/'
+        let card = this.cards[0]
+        let url = ''
+        if (card.isFormation) {
+          url = 'api/formations/' + card.id + '/keep/'
+        } else {
+          url = 'api/offers/' + card.id + '/accept/'
+        }
         this.$http.post(url)
-        this.offers_ids.shift()
+        this.cards.shift()
       },
       dislike: function () {
-        let url = 'api/offers/' + this.offers_ids[0] + '/refuse/'
+        let card = this.cards[0]
+        let url = ''
+        if (card.isFormation) {
+          url = 'api/formations/' + card.id + '/drop/'
+        } else {
+          url = 'api/offers/' + card.id + '/refuse/'
+        }
         this.$http.post(url)
-        this.offers_ids.shift()
+        this.cards.shift()
       }
     },
     created: function () {
-      this.get_offers_ids()
+      this.get_cards_ids()
     }
   }
 </script>
@@ -71,7 +102,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}  
+}
 .cards{
   position: relative;
   padding: 0;

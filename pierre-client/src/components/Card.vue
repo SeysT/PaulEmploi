@@ -1,12 +1,17 @@
 <template>
   <div>
-    <div v-if="!isExpanded">
-      <Offer :offer_id="offer_id"></Offer>
-      <button v-on:click.prevent="toggle()" class="button details"></button>
+    <div v-if="is_formation">
+      <Formation :formation_id="card_id"></Formation>
     </div>
     <div v-else>
-      <OfferExpand :offer_id="offer_id"></OfferExpand>
-      <button v-on:click.prevent="toggle()" class="button back"></button>
+      <div v-if="!isExpanded">
+        <Offer :offer_id="card_id"></Offer>
+        <button v-on:click.prevent="toggle()" class="button details">Droite</button>
+      </div>
+      <div v-else>
+        <button v-on:click.prevent="toggle()" class="button back">Gauche</button>
+        <OfferExpand :offer_id="card_id"></OfferExpand>
+      </div>
     </div>
   </div>
 </template>
@@ -14,17 +19,23 @@
 <script>
   import Offer from './Offer.vue'
   import OfferExpand from './OfferExpand.vue'
+  import Formation from './Formation.vue'
 
   export default {
     name: 'Card',
     components: {
       Offer,
-      OfferExpand
+      OfferExpand,
+      Formation
     },
     props: {
-      offer_id: {
+      card_id: {
         type: String,
         default: '1'
+      },
+      is_formation: {
+        type: Boolean,
+        default: false
       }
     },
     data () {
@@ -65,5 +76,5 @@
   }
 .back{
   background-image: url(../assets/back.png);
-}  
+}
 </style>
