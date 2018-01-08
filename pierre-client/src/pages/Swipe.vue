@@ -1,25 +1,27 @@
 <template>
-  <div class="wrap">
+  <div class="container">
     <Navbar :title="title"></Navbar>
-    <div v-show="active = offers_ids[0]" 
-         v-touch:swipeleft="dislike"
-         v-touch:swiperight="like"
-         class="cards">
-      <Card v-for="id in offers_ids" 
-          :offer_id="id" 
-          :key="id"
-          class="cards_item"
-          :class="{
-            'cards_item--active': active == id,
-          }"
-          v-touch:swipeleft="dislike" >
-      </Card>  
-    </div>
-    <div class="actions"> 
-      <button class="button dislike" v-on:click.prevent="dislike"></button>
-      <button class="button like" v-on:click.prevent="like"></button>
-    </div>  
-  </div> 
+    <div class="wrap">
+      <div v-show="active = offers_ids[0]" 
+          v-touch:swipeleft="dislike"
+          v-touch:swiperight="like"
+          class="cards">
+        <Card v-for="id in offers_ids" 
+            :offer_id="id" 
+            :key="id"
+            class="cards_item"
+            :class="{
+              'cards_item--active': offers_ids[0] == id,
+            }"
+            v-touch:swipeleft="dislike" >
+        </Card>  
+      </div>
+      <div class="actions"> 
+        <button class="button dislike" v-on:click.prevent="dislike"></button>
+        <button class="button like" v-on:click.prevent="like"></button>
+      </div>  
+    </div> 
+  </div>
 </template>
 
 <script>
@@ -70,7 +72,7 @@
 .wrap{
   width: 100%;
   height: 100%;
-  max-width: 320px;
+  max-width: 520px;
   padding: 0 16px;
   margin: 0 auto;
   display: flex;

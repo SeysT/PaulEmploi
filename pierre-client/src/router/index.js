@@ -3,7 +3,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import VueCookies from 'vue-cookies'
-import VueTouch from 'vue-touch'
 
 import Swipe from '@/pages/Swipe'
 import Login from '@/pages/Login'
@@ -12,7 +11,6 @@ import Home from '@/pages/Home'
 import MyOffers from '@/pages/MyOffers'
 
 Vue.use(VueRouter)
-Vue.use(VueTouch, {name: 'v-touch'})
 
 Vue.use(VueCookies)
 

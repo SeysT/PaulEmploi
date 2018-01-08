@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="container">
     <Navbar :title="title"></Navbar>
-    <button v-on:click.prevent="swipe()">Start & swipe the best offers!</button>
+    <button class="btn btn-primary" v-on:click.prevent="swipe()">Start & swipe the best offers!</button>
   </div>
 </template>
 

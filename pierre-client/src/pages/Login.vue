@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <div class="container">
     <Navbar :title="title"></Navbar>
     <form>
-      Username: <br>
-      <input type='text' name='username' v-model='username'><br>
-      Password: <br>
-      <input type='password' name='password' v-model='password'><br><br>
-      <input type='submit' name='submit' v-on:click.prevent='login()'>
+      <div class="well">
+        <label>Username:</label>
+        <input type='text' class="form-control" placeholder="Username" name='username' v-model='username'>
+        <label>Password:</label>
+        <input type='password' class="form-control" placeholder="Password" name='password' v-model='password'><br>
+        <button type='submit' name='submit' class="btn btn-large btn-block btn-primary" v-on:click.prevent='login()'>Log In</button>
+      </div>
     </form>
   </div>
 </template>

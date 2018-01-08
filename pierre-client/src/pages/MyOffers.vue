@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div class="container">
     <Card v-for="id in my_ids" :offer_id="id" :key="id"></Card>
   </div>
 </template>
 
 <script>
   import Card from '../components/Card.vue'
-
+  import Navbar from '../components/Navbar.vue'
+  
   export default {
     name: 'MyOffers',
     components: {
