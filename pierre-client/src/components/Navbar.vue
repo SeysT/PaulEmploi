@@ -17,10 +17,10 @@
     },
     methods: {
       home: function () {
-        this.$router.push({ path: '/' })
+        this.$router.push({ name: 'Home' })
       },
       profile: function () {
-        this.$router.push({ path: '/profile' })
+        this.$router.push({ name: 'Profile' })
       }
     }
   }
