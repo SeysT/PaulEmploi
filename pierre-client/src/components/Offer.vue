@@ -21,7 +21,7 @@
         default: '1'
       }
     },
-    data () {
+    data() {
       return {
         title: '',
         company: '',
@@ -35,14 +35,14 @@
     },
     methods: {
       get_offer: function (id) {
-        let url = 'offers/' + id + '/'
-        this.$http.get(url).then(function (data) {
-          this.title = data.body.title
-          this.company = data.body.company
-          this.language = data.body.language
-          this.location = data.body.location
-          this.degree = data.body.degree
-          this.contract_type = data.body.contract_type
+        let url = 'api/offers/' + id + '/'
+        this.$http.get(url).then(function (resp) {
+          this.title = resp.body.title
+          this.company = resp.body.company
+          this.language = resp.body.language
+          this.location = resp.body.location
+          this.degree = resp.body.degree
+          this.contract_type = resp.body.contract_type
         })
       }
     },

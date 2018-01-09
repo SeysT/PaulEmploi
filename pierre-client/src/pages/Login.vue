@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <Navbar :title="title"></Navbar>
+    <div class="msg">{{ msg }}</div>
     <form>
       <div class="well">
         <label>Username:</label>
@@ -25,23 +26,42 @@
       return {
         title: 'Login',
         username: '',
-        password: ''
+        password: '',
+        msg: '',
+        redirected: false
       }
     },
     methods: {
+      set_msg: function () {
+        if (this.$route.params.errors === 401) {
+          this.redirected = true
+          this.msg = 'You have to login to see this page.'
+        }
+      },
       login: function () {
-        this.$http.post(
-          'http://localhost:8000/auth/get-token/',
-           { username: this.$data.username, password: this.$data.password }
-        ).then(function (data) {
-          this.$cookies.set('token', data.body.token)
-          this.$router.push({ path: '/swipe' })
+        let url = 'auth/get-token/'
+        let body = {
+          username: this.$data.username,
+          password: this.$data.password
+        }
+        this.$http.post(url, body).then(function (resp) {
+          this.$cookies.set('token', resp.body.token)
+          if (this.redirected) {
+            this.$router.go(-1)
+          } else {
+            this.$router.push({ name: 'Swipe' })
+          }
         })
       }
+    },
+    created: function () {
+      this.set_msg()
     }
   }
 </script>
 
 <style scoped>
-
+.msg {
+  color: red;
+}
 </style>

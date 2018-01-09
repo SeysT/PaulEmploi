@@ -20,7 +20,7 @@
     },
     methods: {
       swipe: function () {
-        this.$router.push({ path: '/swipe' })
+        this.$router.push({ name: 'Swipe' })
       }
     }
   }

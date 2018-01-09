@@ -42,23 +42,19 @@
     },
     methods: {
       get_offers_ids: function () {
-        let url = 'profile/offers_to_show/'
-        this.$http.get(url).then(function (data) {
-          this.offers_ids = data.body.map(offer => offer.id.toString())
+        let url = 'api/profile/offers_to_show/'
+        this.$http.get(url).then(function (resp) {
+          this.offers_ids = resp.body.map(offer => offer.id.toString())
         })
       },
       like: function () {
-        let url = 'offers/' + this.offers_ids[0] + '/accept/'
-        this.$http.post(url).then(function (data) {
-          console.log(data)
-        })
+        let url = 'api/offers/' + this.offers_ids[0] + '/accept/'
+        this.$http.post(url)
         this.offers_ids.shift()
       },
       dislike: function () {
-        let url = 'offers/' + this.offers_ids[0] + '/refuse/'
-        this.$http.post(url).then(function (data) {
-          console.log(data)
-        })
+        let url = 'api/offers/' + this.offers_ids[0] + '/refuse/'
+        this.$http.post(url)
         this.offers_ids.shift()
       }
     },
