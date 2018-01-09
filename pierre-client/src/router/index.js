@@ -10,7 +10,7 @@ import Profile from '@/pages/Profile'
 import Home from '@/pages/Home'
 import MyOffers from '@/pages/MyOffers'
 import Recover from '@/pages/Recover'
-
+import NotFound from '@/pages/NotFound'
 
 Vue.use(VueRouter)
 
@@ -32,6 +32,11 @@ Vue.http.interceptors.push(function (request, next) {
 
 export default new VueRouter({
   routes: [
+    {
+      path: '*',
+      name: 'NotFound',
+      component: NotFound
+    },
     {
       path: '/',
       name: 'Home',
