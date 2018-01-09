@@ -7,7 +7,7 @@ from rest_framework.authtoken.models import Token
 from api.models.formation import Formation
 from api.models.fields import Location, Interest, Degree, Skill, Language, Contract
 from api.models.offer import Offer
-from api.utils.offer_selector import OfferSelector
+from api.utils.selector import OfferSelector, FormationSelector
 
 
 class Profile(models.Model):
@@ -45,10 +45,21 @@ class Profile(models.Model):
         return self.accepted_offers.all().union(self.refused_offers.all())
 
     @property
+    def seen_formations(self):
+        """Return all formations seen by the user"""
+        return self.kept_formations.all().union(self.dropped_formations.all())
+
+    @property
     def offers_to_show(self):
         """Return a list of all offers ids we might want to show to the user"""
         offer_selector = OfferSelector(self, Offer.objects.difference(self.seen_offers.all()))
-        return offer_selector.get_interesting_offers()
+        return offer_selector.get_interesting()
+
+    @property
+    def formations_to_show(self):
+        """Return a list of all formations ids we might want to show to the user"""
+        formation_selector = FormationSelector(self, Formation.objects.difference(self.seen_formations.all()))
+        return formation_selector.get_interesting()
 
     def accept_offer(self, offer):
         """This function wraps the add function of accepted_offers attribute"""

@@ -8,6 +8,7 @@ from rest_framework.response import Response
 
 from api.models.fields import Contract, Location, Interest, Degree, Skill, Language
 from api.models.profile import Profile
+from api.serializers.formation import FormationIdSerializer
 from api.serializers.offer import OfferIdSerializer
 from api.serializers.profile import ProfileSerializer, UserSerializer
 
@@ -110,4 +111,27 @@ class ProfileViewSet(viewsets.ViewSet):
             return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
         offers_to_show = profile.offers_to_show
         return Response(offers_to_show)
+
+    # GET '/api/profile/kept_formations/'
+    @list_route(methods=['get'])
+    def kept_formations(self, request):
+        try:
+            profile = request.user.profile
+        except Profile.DoesNotExist:
+            return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
+        kept_formations = profile.kept_formations
+        serializer = FormationIdSerializer(kept_formations, many=True)
+        return Response(serializer.data)
+
+    # GET '/api/profile/formations_to_show/'
+    @list_route(methods=['get'])
+    def formations_to_show(self, request):
+        try:
+            profile = request.user.profile
+        except Profile.DoesNotExist:
+            return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
+        formations_to_show = profile.formations_to_show
+        return Response(formations_to_show)
+
+
 
