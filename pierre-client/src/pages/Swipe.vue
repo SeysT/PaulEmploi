@@ -3,8 +3,6 @@
     <Navbar :title="title"></Navbar>
     <div class="wrap">
       <div v-show="active = offers_ids[0]" 
-          v-touch:swipeleft="dislike"
-          v-touch:swiperight="like"
           class="cards">
         <Card v-for="id in offers_ids" 
             :offer_id="id" 
@@ -12,8 +10,7 @@
             class="cards_item"
             :class="{
               'cards_item--active': offers_ids[0] == id,
-            }"
-            v-touch:swipeleft="dislike" >
+            }" >
         </Card>  
       </div>
       <div class="actions"> 
