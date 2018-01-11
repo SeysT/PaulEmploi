@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Navbar :title="title"></Navbar>
-    <div class="msg">{{ msg }}</div>
+    <div>
+      <div class="msg">{{ msg }}</div>
       <div class="container">
       <div class="row">
       <div class="col-md-6 col-md-offset-3">
