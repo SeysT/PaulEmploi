@@ -81,13 +81,8 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
-
 export default {
     name: 'Login',
-    components: {
-      Navbar
-    },
     data () {
       return {
         title: 'Login',
@@ -115,7 +110,7 @@ export default {
               if (this.redirected) {
                 this.$router.go(-1)
               } else {
-                this.$router.push({ name: 'Swipe' })
+                this.$router.push({ name: 'Home' })
               }
             })
         },
