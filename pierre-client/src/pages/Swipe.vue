@@ -5,11 +5,11 @@
       <div class="cards">
         <Card v-for="card_id in cards_ids"
             :card_id="card_id"
-            :key="card.toString()+isFormation.toString()"
+            :key="card_id.toString()+isFormation.toString()"
             :is_formation="isFormation"
             class="cards_item"
             :class="{
-              'cards_item--active': offers_ids[0] === id,
+              'cards_item--active': cards_ids[0] === card_id,
             }" >
         </Card>
         <div class="cards_item">
@@ -49,7 +49,7 @@
       },
       get_offers_ids: function () {
         let url = 'api/profile/offers_to_show/'
-        this.cards_ids = []
+        // this.cards_ids = []
         this.get_ids(url)
       },
       get_formations_ids: function () {
