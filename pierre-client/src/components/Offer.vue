@@ -21,7 +21,7 @@
         default: '1'
       }
     },
-    data() {
+    data () {
       return {
         title: '',
         company: '',

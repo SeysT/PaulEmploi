@@ -22,11 +22,11 @@
               <div class="col-lg-12">
                 <form id="login-form" method="post" role="form" style="display: block;">
                   <div class="form-group">
-                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" 
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username"
                     value="" v-model='username'>
                   </div>
                   <div class="form-group">
-                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" 
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password"
                     v-model='password'>
                   </div>
                   <div class="form-group text-center">
@@ -36,7 +36,7 @@
                   <div class="form-group">
                     <div class="row">
                       <div class="col-sm-6 col-sm-offset-3">
-                        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In" v-on:click.prevent='login()'> 
+                        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In" v-on:click.prevent='login()'>
                       </div>
                     </div>
                   </div>
@@ -124,24 +124,23 @@
     created: function () {
       this.set_msg()
     },
-
-      register: function () {
-        console.log('register\'s working')
-      },
-      login_link_click: function (e) {
-        $('#login-form').delay(100).fadeIn(100)
-        $('#register-form').fadeOut(100)
-        $('#register-form-link').removeClass('active')
-        $('#login-form-link').addClass('active')
-        e.preventDefault()
-      },
-      register_link_click: function (e) {
-        $('#register-form').delay(100).fadeIn(100)
-        $('#login-form').fadeOut(100)
-        $('#login-form-link').removeClass('active')
-        $('#register-form-link').addClass('active')
-        e.preventDefault()
-      }
+    register: function () {
+      console.log('register\'s working')
+    },
+    login_link_click: function (e) {
+      $('#login-form').delay(100).fadeIn(100)
+      $('#register-form').fadeOut(100)
+      $('#register-form-link').removeClass('active')
+      $('#login-form-link').addClass('active')
+      e.preventDefault()
+    },
+    register_link_click: function (e) {
+      $('#register-form').delay(100).fadeIn(100)
+      $('#login-form').fadeOut(100)
+      $('#login-form-link').removeClass('active')
+      $('#register-form-link').addClass('active')
+      e.preventDefault()
+    }
   }
 </script>
 

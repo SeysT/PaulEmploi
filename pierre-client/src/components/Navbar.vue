@@ -6,9 +6,9 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target='#myNavbar'>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
-              <span class="icon-bar"></span>  
+              <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="home">Paul Emploi</a>
+            <a class="navbar-brand" href="/">Paul Emploi</a>
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -17,7 +17,7 @@
             </ul>
           </div>
         </div>
-    </nav>      
+    </nav>
     <!-- <router-link to="/">Home</router-link> -->
     <!-- <router-link to="profile">Profile</router-link> -->
   </div>

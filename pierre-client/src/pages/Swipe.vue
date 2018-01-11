@@ -2,22 +2,25 @@
   <div class="container">
     <Navbar :title="title"></Navbar>
     <div class="wrap">
-      <div v-show="active = offers_ids[0]" 
-          class="cards">
-        <Card v-for="id in offers_ids" 
-            :offer_id="id" 
-            :key="id"
+      <div class="cards">
+        <Card v-for="card_id in cards_ids"
+            :card_id="card_id"
+            :key="card.toString()+isFormation.toString()"
+            :is_formation="isFormation"
             class="cards_item"
             :class="{
-              'cards_item--active': offers_ids[0] == id,
+              'cards_item--active': offers_ids[0] === id,
             }" >
-        </Card>  
+        </Card>
+        <div class="cards_item">
+          <p class="background-text">No more cards to swipe!<br/><br/>But you're welcome to come back tomorrow! :)</p>
+        </div>
       </div>
-      <div class="actions"> 
-        <button class="button dislike" v-on:click.prevent="dislike"></button>
-        <button class="button like" v-on:click.prevent="like"></button>
-      </div>  
-    </div> 
+      <div class="actions">
+        <button class="button dislike" v-on:click.prevent="action(like=true)"></button>
+        <button class="button like" v-on:click.prevent="action(like=false)"></button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -34,25 +37,39 @@
     data () {
       return {
         title: 'Swipe',
-        offers_ids: ['1', '2', '3']
+        cards_ids: ['1', '2', '3'],
+        isFormation: false
       }
     },
     methods: {
-      get_offers_ids: function () {
-        let url = 'api/profile/offers_to_show/'
+      get_ids: function (url) {
         this.$http.get(url).then(function (resp) {
-          this.offers_ids = resp.body.map(offer => offer.id.toString())
+          this.cards_ids += resp.body.map(card => card.id.toString())
         })
       },
-      like: function () {
-        let url = 'api/offers/' + this.offers_ids[0] + '/accept/'
-        this.$http.post(url)
-        this.offers_ids.shift()
+      get_offers_ids: function () {
+        let url = 'api/profile/offers_to_show/'
+        this.cards_ids = []
+        this.get_ids(url)
       },
-      dislike: function () {
-        let url = 'api/offers/' + this.offers_ids[0] + '/refuse/'
-        this.$http.post(url)
-        this.offers_ids.shift()
+      get_formations_ids: function () {
+        let url = 'api/profile/formations_to_show/'
+        this.get_ids(url)
+      },
+      action: function (like) {
+        let cardId = this.cards_ids[0]
+        let urlStart = this.isFormation ? 'api/formations/' : 'api/offers/'
+        let urlEnd = this.isFormation
+          ? like
+            ? '/keep/' : '/drop/'
+          : like
+            ? '/accept/' : '/refuse/'
+        if (this.cards_ids.length === 1 && !this.isFormation) {
+          this.isFormation = true
+          this.get_formations_ids()
+        }
+        this.$http.post(urlStart + cardId + urlEnd)
+        this.cards_ids.shift()
       }
     },
     created: function () {
@@ -71,7 +88,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}  
+}
+
 .cards{
   position: relative;
   padding: 0;
@@ -80,6 +98,7 @@
 
   list-style-type: none;
 }
+
 .cards_item {
   position: absolute;
   top: 0;
@@ -94,20 +113,21 @@
   background-color: #eff4ff;
 
   visibility: hidden;
-
 }
+
 .cards_item--active {
   z-index: 1;
   visibility: visible;
   transition: all .4s .1s cubic-bezier(.87,-.41,.19,1.44);
 }
 
-.actions{
+.actions {
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 20px 15px;
 }
+
 .button {
   display: flex;
   justify-content: space-around;
@@ -127,12 +147,19 @@
 
   transition: all .3s;
 }
+
 .like {
   background-image: url(../assets/like.png);
-  }
-.dislike{
+}
+
+.dislike {
   background-image: url(../assets/dislike.png);
-  }
+}
 
-
+.background-text {
+  position: relative;
+  top: 8em;
+  z-index: -12;
+  visibility: visible;
+}
 </style>
