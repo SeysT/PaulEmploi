@@ -1,40 +1,47 @@
 <template>
   <div class="container">
     <Navbar :title="title"></Navbar>
-    <form>
-      <br>
-      <div class="well">
-        <label>Location:</label>
-          <input type='text' class="form-control" placeholder="Paris" v-model="location">
-          <!-- TODO: Ajouter de la validation-->
-        <label>Interests:</label>
-          <select class="form-control" v-model="interests" multiple>
-            <option v-for="interest in available_interests">{{ interest }}</option>
-          </select>
-        <label>Degrees:</label>
-          <select class="form-control" v-model="degrees" multiple>
-            <option v-for="degree in available_degrees">{{ degree }}</option>
-          </select>
-        <label>Skills:</label>
-          <select class="form-control" v-model="skills" multiple>
-            <option v-for="skill in available_skills">{{ skill }}</option>
-          </select>
-        <label>Languages :</label>
-          <select class="form-control" v-model="languages" multiple>
-            <option v-for="language in available_languages">{{ language }}</option>
-          </select>
-        <label>Minimum salary (K euros):</label>
-          <input class="form-control" type="number" v-model="min_salary">
-        <label>Maximum salary (K euros):</label>
-          <input class="form-control" type="number" v-model="max_salary">
-        <label>Contract type:</label>
-          <select class="form-control" v-model="contract">
-            <option v-for="contract in available_contracts">{{ contract }}</option>
-          </select>
-          <br>
-          <button name='save' class="btn btn-large btn-block btn-primary" v-on:click.prevent="save_profile()">Save</button>
+    <router-link to="/profile/my_offers">My Offers</router-link>
+    <div class="panel panel-body">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <form>
+            <br>
+            <div class="well">
+              <label class="pull-left">Location:</label>
+                <input type='text' class="form-control" placeholder="Paris" v-model="location">
+                <!-- TODO: Ajouter de la validation-->
+              <label class="pull-left">Interests:</label>
+                <select class="form-control" v-model="interests" multiple>
+                  <option v-for="interest in available_interests">{{ interest }}</option>
+                </select>
+              <label class="pull-left">Degrees:</label>
+                <select class="form-control" v-model="degrees" multiple>
+                  <option v-for="degree in available_degrees">{{ degree }}</option>
+                </select>
+              <label class="pull-left">Skills:</label>
+                <select class="form-control" v-model="skills" multiple>
+                  <option v-for="skill in available_skills">{{ skill }}</option>
+                </select>
+              <label class="pull-left">Languages :</label>
+                <select class="form-control" v-model="languages" multiple>
+                  <option v-for="language in available_languages">{{ language }}</option>
+                </select>
+              <label class="pull-left">Minimum salary (K euros):</label>
+                <input class="form-control" type="number" v-model="min_salary">
+              <label class="pull-left">Maximum salary (K euros):</label>
+                <input class="form-control" type="number" v-model="max_salary">
+              <label class="pull-left">Contract type:</label>
+                <select class="form-control" v-model="contract">
+                  <option v-for="contract in available_contracts">{{ contract }}</option>
+                </select>
+                <br>
+                <button name='save' class="btn btn-large btn-block form-control btn btn-register" v-on:click.prevent="save_profile()">Save</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -114,5 +121,9 @@
 </script>
 
 <style scoped>
-
+.pull-left {
+  margin-bottom : 0.5em;
+  margin-top : 0.5em;
+  color : #029f5b;
+}
 </style>
