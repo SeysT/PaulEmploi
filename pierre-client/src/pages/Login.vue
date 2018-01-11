@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <Navbar :title="title"></Navbar>
     <div class="msg">{{ msg }}</div>
       <div class="container">

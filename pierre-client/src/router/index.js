@@ -29,6 +29,7 @@ Vue.http.interceptors.push(function (request, next) {
   })
 })
 
+
 export default new VueRouter({
   routes: [
     {

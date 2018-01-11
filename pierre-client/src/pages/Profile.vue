@@ -1,51 +1,40 @@
 <template>
-  <div>
+  <div class="container">
     <Navbar :title="title"></Navbar>
-    <button v-on:click.prevent="my_offers()">My Offers</button>
+    <router-link to="/profile/my_offers">My Offers</router-link>
     <form>
-      <p>
-        Location :
-        <input v-model="location">
-        <!-- TODO: Ajouter de la validation-->
-      <p>
-        Interests :
-        <select v-model="interests" multiple>
-          <option v-for="interest in available_interests">{{ interest }}</option>
-        </select>
-      </p>
-      <p>
-        Degrees :
-        <select v-model="degrees" multiple>
-          <option v-for="degree in available_degrees">{{ degree }}</option>
-        </select>
-      </p>
-      <p>
-        Skills :
-        <select v-model="skills" multiple>
-          <option v-for="skill in available_skills">{{ skill }}</option>
-        </select>
-      </p>
-      <p>
-        Languages :
-        <select v-model="languages" multiple>
-          <option v-for="language in available_languages">{{ language }}</option>
-        </select>
-      </p>
-      <p>
-        Minimum salary :
-        <input type="number" v-model="min_salary">
-      </p>
-      <p>
-        Maximum salary :
-        <input type="number" v-model="max_salary">
-      </p>
-      <p>
-        Contract type :
-        <select v-model="contract">
-          <option v-for="contract in available_contracts">{{ contract }}</option>
-        </select>
-      </p>
-      <button v-on:click.prevent="save_profile()">Save</button>
+      <br>
+      <div class="well">
+        <label>Location:</label>
+          <input type='text' class="form-control" placeholder="Paris" v-model="location">
+          <!-- TODO: Ajouter de la validation-->
+        <label>Interests:</label>
+          <select class="form-control" v-model="interests" multiple>
+            <option v-for="interest in available_interests">{{ interest }}</option>
+          </select>
+        <label>Degrees:</label>
+          <select class="form-control" v-model="degrees" multiple>
+            <option v-for="degree in available_degrees">{{ degree }}</option>
+          </select>
+        <label>Skills:</label>
+          <select class="form-control" v-model="skills" multiple>
+            <option v-for="skill in available_skills">{{ skill }}</option>
+          </select>
+        <label>Languages :</label>
+          <select class="form-control" v-model="languages" multiple>
+            <option v-for="language in available_languages">{{ language }}</option>
+          </select>
+        <label>Minimum salary (K euros):</label>
+          <input class="form-control" type="number" v-model="min_salary">
+        <label>Maximum salary (K euros):</label>
+          <input class="form-control" type="number" v-model="max_salary">
+        <label>Contract type:</label>
+          <select class="form-control" v-model="contract">
+            <option v-for="contract in available_contracts">{{ contract }}</option>
+          </select>
+          <br>
+          <button name='save' class="btn btn-large btn-block btn-primary" v-on:click.prevent="save_profile()">Save</button>
+      </div>
     </form>
   </div>
 </template>
