@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <Navbar :title="title"></Navbar>
-    <button class="btn btn-primary" v-on:click.prevent="swipe()">Start & swipe the best offers!</button>
+    <button class="btn btn-success" v-on:click.prevent="swipe()">Start & swipe the best offers!</button>
+    <br>
+    <router-link to="/profile/my_offers" class="btn btn-info my-offers">My Offers</router-link>
   </div>
 </template>
 
@@ -27,5 +29,8 @@
 </script>
 
 <style scoped>
-
+.my-offers{
+  position: relative;
+  top: 30px;
+}
 </style>

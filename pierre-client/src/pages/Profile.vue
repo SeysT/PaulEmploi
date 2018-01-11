@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <Navbar :title="title"></Navbar>
-    <router-link to="/profile/my_offers">My Offers</router-link>
     <form>
       <br>
       <div class="well">
