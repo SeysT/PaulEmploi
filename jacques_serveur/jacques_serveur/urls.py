@@ -18,10 +18,13 @@ from django.contrib import admin
 
 from rest_framework.authtoken.views import obtain_auth_token
 
+from jacques_serveur.views.registration import register
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/get-token/', obtain_auth_token),
+    url(r'^auth/register/', register),
     url(r'^auth/', include('rest_framework.urls', namespace='django_rest_framework')),
     url(r'^api/', include('api.urls')),
 ]
