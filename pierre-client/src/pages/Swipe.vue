@@ -49,7 +49,7 @@
       },
       get_offers_ids: function () {
         let url = 'api/profile/offers_to_show/'
-        // this.cards_ids = []
+        this.cards_ids = []
         this.get_ids(url)
       },
       get_formations_ids: function () {
