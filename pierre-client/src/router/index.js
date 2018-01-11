@@ -17,7 +17,7 @@ Vue.use(VueRouter)
 Vue.use(VueCookies)
 
 Vue.use(VueResource)
-Vue.http.options.root = 'http://germoon.nebulae.co/' // Si Django tourne en local : 'http://localhost:8000/api/'
+Vue.http.options.root = 'https://germoon.nebulae.co/' // Si Django tourne en local : 'http://localhost:8000/api/'
 Vue.http.interceptors.push(function (request, next) {
   if (Vue.cookies.get('token') !== null) {
     request.headers.set('Authorization', 'Token ' + Vue.cookies.get('token'))
