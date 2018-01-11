@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-    <div>
+    <div class="container">
       <div class="msg">{{ msg }}</div>
       <div class="container">
       <div class="row">
