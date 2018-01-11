@@ -13,7 +13,7 @@ class Selector:
         objects = [
             (object.id, self.compute_score(object))
             for object in self.available_objects
-            if self.compute_score(object) >= 5
+            if self.compute_score(object) >= 0
         ]
         objects.sort(key=lambda object_tuple: object_tuple[1])
         ordered_objects_ids = [object[0] for object in objects][:max_number] if max_number != None \
@@ -33,6 +33,8 @@ class OfferSelector(Selector):
 
     def compute_score(self, offer):
         # We select an offer if it's in the same city
+        # TODO : to improve the location matching, we could compute the distance
+        # from the GPS coordiantes
         score_location = 1 if offer.location.city_name == self.desired_location.city_name else 0.1
         # We select an offer if it respects the min salary desired
         score_min_salary = 1 if (offer.min_salary <= self.desired_min_salary or offer.min_salary == None) else 0.1
@@ -40,14 +42,14 @@ class OfferSelector(Selector):
         score_contract = 1 if self.desired_contract == offer.contract_type else 0.1
         # languages are a +, count the number of languages satisfied
         score_language = 0.1
-        for lang in self.languages:
+        for lang in self.languages.all():
             if lang in offer.languages.all():
                 score_language += 1
         # count the number of skills satisfied
         # to increase the number of skills that match the profile, we get skills
         # with similar names (because skills in database are ugly !)
         score_skills = 0.1
-        for skill in self.skills:
+        for skill in self.skills.all():
             if offer.skills.filter(name__search=skill.name):
                 score_skills += 1
 

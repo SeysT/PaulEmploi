@@ -41,6 +41,7 @@ class Offer(models.Model):
             self.weekly_work_time,
             self.company,
             self.location,
+            self.skills,
             self.experience_name,
             self.creation_date
         )
