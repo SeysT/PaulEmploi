@@ -3,11 +3,11 @@
     <div v-if="!is_formation">
       <div v-if="!isExpanded">
         <Offer :offer_id="card_id"></Offer>
-        <button v-on:click.prevent="toggle()" class="button details">Droite</button>
+        <button v-on:click.prevent="toggle()" class="button details"></button>
       </div>
       <div v-else>
-        <button v-on:click.prevent="toggle()" class="button back">Gauche</button>
         <OfferExpand :offer_id="card_id"></OfferExpand>
+        <button v-on:click.prevent="toggle()" class="button back"></button>
       </div>
     </div>
     <div v-else>

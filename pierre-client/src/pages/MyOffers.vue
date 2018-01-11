@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <Navbar :title="title"></Navbar>
     <Card v-for="id in my_ids" :offer_id="id" :key="id"></Card>
   </div>
 </template>
@@ -7,14 +8,16 @@
 <script>
   import Card from '../components/Card.vue'
   import Navbar from '../components/Navbar.vue'
-  
+
   export default {
     name: 'MyOffers',
     components: {
-      Card
+      Card,
+      Navbar
     },
     data () {
       return {
+        title: 'My Offers',
         my_ids: ['1', '2', '3']
       }
     },

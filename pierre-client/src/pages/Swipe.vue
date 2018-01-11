@@ -157,7 +157,7 @@
 }
 
 .background-text {
-  position: absolute;
+  position: relative;
   top: 8em;
   z-index: -12;
   visibility: visible;
