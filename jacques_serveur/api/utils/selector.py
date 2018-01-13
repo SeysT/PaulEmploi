@@ -13,7 +13,7 @@ class Selector:
         objects = [
             (object.id, self.compute_score(object))
             for object in self.available_objects
-            if self.compute_score(object) >= 0
+            if self.compute_score(object) >= 1
         ]
         objects.sort(key=lambda object_tuple: object_tuple[1])
         ordered_objects_ids = [object[0] for object in objects][:max_number] if max_number != None \
@@ -50,11 +50,19 @@ class OfferSelector(Selector):
         # with similar names (because skills in database are ugly !)
         score_skills = 0.1
         for skill in self.skills.all():
-            if offer.skills.filter(name__search=skill.name):
+            if offer.skills.filter(name__search=skill.name) or offer.skills.filter(name__icontains=skill.name):
                 score_skills += 1
 
         # calculating the score, skills are weighted with 5, languages with 1
         score = score_location * score_min_salary * score_contract * (score_skills * 5 + score_language)
+        print("""=========SCORES========\nLOCATION: {}\nMIN_SALARY: {}\nCONTRACT: {}\nLANGUAGE: {}\nSKILLS: {}\nTOTAL: {}\n""".format(
+                  score_location,
+                  score_min_salary,
+                  score_contract,
+                  score_language,
+                  score_skills,
+                  score
+        ))
         return score
 
 
