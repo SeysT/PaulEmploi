@@ -62,7 +62,7 @@
   height: 35px;
   margin: 0 auto;
 
-  background-color:#eff4ff;
+  background-color:rgb(246, 255, 249);
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;

@@ -71,9 +71,6 @@
       }
     },
     methods: {
-      my_offers: function () {
-        this.$router.push({ name: 'MyOffers' })
-      },
       get_available: function () {
         let url = 'api/fields/'
         this.$http.get(url).then(function (resp) {
@@ -110,7 +107,7 @@
           desired_max_salary: this.max_salary
         }
         this.$http.put(url, body)
-        alert("Changes saved!")
+        alert('Changes saved!')
       }
     },
     created: function () {

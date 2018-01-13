@@ -22,7 +22,7 @@ Vue.http.interceptors.push(function (request, next) {
     request.headers.set('Authorization', 'Token ' + Vue.cookies.get('token'))
   }
   next(function (resp) {
-    if (resp.status === 401) {
+    if (resp.status === 401 || resp.status === 403 ) {
       this.$router.push({ name: 'Login', params: { errors: 401 } })
     }
   })
