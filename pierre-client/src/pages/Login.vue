@@ -153,9 +153,5 @@ export default {
 </script>
 
 <style scoped>
-.msg {
-  color: red;
-  margin-bottom: 1em;
-}
 
 </style>
