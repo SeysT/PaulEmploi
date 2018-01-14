@@ -1,3 +1,9 @@
+# Ressources
+
+- Pour accéder à la documentation du projet, rendez-vous sur [le wiki](https://gitlab.centralesupelec.fr/2014legerm/paul-emploi/wikis/Installation)
+- Pour tester directement la version de production, rendez-vous à l'addresse [https://germoon.nebulae.co/](https://germoon.nebulae.co/#/)
+- Pour accéder directement à l'API, rendez-vous à l'addresse [https://germoon.nebulae.co/api/](https://germoon.nebulae.co/api/)
+
 # Procédure de mise en place de l'environnement de développement
 
 ## Liste des dépendances
