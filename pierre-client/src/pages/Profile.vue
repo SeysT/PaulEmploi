@@ -2,6 +2,7 @@
   <div class="container">
     <Navbar :title="title"></Navbar>
     <router-link to="/profile/my_offers">My Offers</router-link>
+    <router-link to="/profile/my_formations">My Formations</router-link>
     <div class="panel panel-body">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -76,9 +77,6 @@
       }
     },
     methods: {
-      my_offers: function () {
-        this.$router.push({ name: 'MyOffers' })
-      },
       get_available: function () {
         let url = 'api/fields/'
         this.$http.get(url).then(function (resp) {

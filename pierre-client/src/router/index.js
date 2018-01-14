@@ -11,6 +11,7 @@ import Home from '@/pages/Home'
 import MyOffers from '@/pages/MyOffers'
 import Recover from '@/pages/Recover'
 import NotFound from '@/pages/NotFound'
+import MyFormations from '@/pages/MyFormations'
 
 Vue.use(VueRouter)
 
@@ -65,6 +66,11 @@ export default new VueRouter({
       path: '/profile/my_offers',
       name: 'MyOffers',
       component: MyOffers
+    },
+    {
+      path: '/profile/my_formations',
+      name: 'MyFormations',
+      component: MyFormations
     }
   ]
 })

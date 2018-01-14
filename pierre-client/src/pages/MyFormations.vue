@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Navbar :title="title"></Navbar>
-    <Card v-for="id in my_ids" :card_id="id" :is_formation=false :key="id"></Card>
+    <Card v-for="id in my_ids" :card_id="id" :is_formation=true :key="id"></Card>
   </div>
 </template>
 
@@ -10,22 +10,22 @@
   import Navbar from '../components/Navbar.vue'
 
   export default {
-    name: 'MyOffers',
+    name: 'MyFormations',
     components: {
       Card,
       Navbar
     },
     data () {
       return {
-        title: 'My Offers',
+        title: 'My Formations',
         my_ids: ['1', '2', '3']
       }
     },
     methods: {
       get_my_ids: function () {
-        let url = 'api/profile/accepted_offers'
+        let url = 'api/profile/kept_formations'
         this.$http.get(url).then(function (resp) {
-          this.my_ids = resp.body.map(offer => offer.id.toString())
+          this.my_ids = resp.body.map(formation => formation.id.toString())
         })
       }
     },
