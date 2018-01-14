@@ -11,6 +11,7 @@ import NotFound from '@/pages/NotFound'
 import Profile from '@/pages/Profile'
 import Recover from '@/pages/Recover'
 import Swipe from '@/pages/Swipe'
+import MyFormations from '@/pages/MyFormations'
 
 Vue.use(VueRouter)
 Vue.use(VueCookies)
@@ -63,6 +64,11 @@ export default new VueRouter({
       path: '/profile/my_offers',
       name: 'MyOffers',
       component: MyOffers
+    },
+    {
+      path: '/profile/my_formations',
+      name: 'MyFormations',
+      component: MyFormations
     }
   ]
 })

@@ -37,8 +37,8 @@
         let url = 'api/formations/' + id + '/'
         this.$http.get(url).then(function (resp) {
           this.name = resp.body.name
-          this.acquired_skills = resp.body.acquired_skills
-          this.acquired_degree = resp.body.acquired_degree
+          this.acquired_skills = resp.body.acquired_skills.name
+          this.acquired_degree = resp.body.acquired_degree.name
           this.duration = resp.body.duration
           this.location = resp.body.location
           this.language = resp.body.language
