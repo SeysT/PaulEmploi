@@ -1,27 +1,31 @@
 <template>
-  <div>
+  <div class="container">
+    <Navbar :title="title"></Navbar>
     <Card v-for="id in my_ids" :card_id="id" :is_formation=true :key="id"></Card>
   </div>
 </template>
 
 <script>
   import Card from '../components/Card.vue'
+  import Navbar from '../components/Navbar.vue'
 
   export default {
     name: 'MyFormations',
     components: {
-      Card
+      Card,
+      Navbar
     },
     data () {
       return {
+        title: 'My Formations',
         my_ids: ['1', '2', '3']
       }
     },
     methods: {
       get_my_ids: function () {
-        let url = 'profile/kept_formations'
-        this.$http.get(url).then(function (data) {
-          this.my_ids = data.body.map(formation => formation.id.toString())
+        let url = 'api/profile/kept_formations'
+        this.$http.get(url).then(function (resp) {
+          this.my_ids = resp.body.map(formation => formation.id.toString())
         })
       }
     },

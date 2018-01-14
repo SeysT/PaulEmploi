@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Navbar :title="title"></Navbar>
-    <Card v-for="id in my_ids" :offer_id="id" :key="id"></Card>
+    <Card v-for="id in my_ids" :card_id="id" :is_formation=false :key="id"></Card>
   </div>
 </template>
 
