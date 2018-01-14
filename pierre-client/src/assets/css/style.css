@@ -171,3 +171,8 @@
 .dislike {
   background-image: url(../dislike.png);
 }
+
+.msg {
+  color: red;
+  margin-bottom: 1em;
+}

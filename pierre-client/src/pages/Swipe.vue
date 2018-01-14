@@ -12,6 +12,11 @@
               'cards_item--active': cards_ids[0] === card_id,
             }" >
         </Card>
+        <div>
+          <p class='msg'>
+            {{ msg }}
+          </p>
+        </div>
         <div class="cards_item">
           <p class="background-text">No more cards to swipe!<br/><br/>But you're welcome to come back tomorrow! :)</p>
         </div>
@@ -39,6 +44,7 @@
         title: 'Swipe',
         cards_ids: ['1', '2', '3'],
         isFormation: false,
+        msg: ''
       }
     },
     methods: {
@@ -48,8 +54,7 @@
             this.cards_ids += resp.body.map(card => card.id.toString())
           },
           function (resp){
-            console.log(resp.status)
-            // to get the error status code
+            this.msg = resp.statusText
           }
         )
       },
