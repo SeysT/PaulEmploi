@@ -34,7 +34,7 @@ cd pierre-client
 npm install
 ```
 
-Au niveau de la configuration du frontend, il faut juste vérifier que la variable `Vue.http.options.root` ait bien l'adresse du back sur lequel on souhaite se connecter. Si l'on souhaite rester en local, il faut alors assigner la variable comme suit :
+Au niveau de la configuration du frontend, il faut juste vérifier que la variable `Vue.http.options.root` ait bien l'adresse du back sur lequel on souhaite se connecter. Si l'on souhaite rester en local, il faut alors assigner la variable comme suit dans le fichier pierre-client/src/router/index.js :
 
 ```js
 Vue.http.options.root = 'http://localhost:8000/'
