@@ -36,11 +36,21 @@ npm install
 
 ### 3. Setup la base de données
 
+#### Configuration classique de la base de données
+
 Notre projet Django est configuré par défaut avec une base de données postgreSQL tournant en localhost sur le port 5432. La configuration suivante devrait suffire pour un démarrage rapide du projet :
 
 - utilisateur : paul
 - mot de passe : paulpaul
 - nom de la base de données : paul_emploi_db
+
+#### Utilisation de Docker
+
+Notre projet comporte un docker-compose file permettant d'utiliser un container pour instancier la base de données. Pour cela, il suffit de se placer à la racine du projet et de lancer la commande :
+
+```sh
+docker-compose up
+```
 
 ### 4. Setup le projet Django
 
