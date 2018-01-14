@@ -3,12 +3,12 @@
     <Navbar :title="title"></Navbar>
     <div class="wrap">
       <div class="cards">
-        <Card v-for="id in my_ids" 
-          :card_id="id" 
-          :is_formation=true 
+        <Card v-for="id in myIds"
+          :card-id="id"
+          :is-formation=true
           :key="id"
-          class="cards_item"></Card>
-    </div>
+          class="cards-item"></Card>
+      </div>
     </div>
   </div>
 </template>
@@ -26,25 +26,25 @@
     data () {
       return {
         title: 'My Formations',
-        my_ids: ['1', '2', '3']
+        myIds: []
       }
     },
     methods: {
-      get_my_ids: function () {
+      getMyIds: function () {
         let url = 'api/profile/kept_formations'
         this.$http.get(url).then(function (resp) {
-          this.my_ids = resp.body.map(formation => formation.id.toString())
+          this.myIds = resp.body.map(formation => formation.id.toString())
         })
       }
     },
     created: function () {
-      this.get_my_ids()
+      this.getMyIds()
     }
   }
 </script>
 
 <style scoped>
-.cards_item{
+.cards-item {
   visibility: visible;
   position: relative;
   margin: 15px;

@@ -9,10 +9,10 @@
           <div class="panel-heading">
             <div class="row">
               <div class="col-xs-6">
-                <a v-on:click='login_link_click()' ><router-link to="/login" class="active" id="login-form-link">Login</router-link></a>
+                <a v-on:click='loginLinkClick()' ><router-link to="/login" class="active" id="login-form-link">Login</router-link></a>
               </div>
               <div class="col-xs-6">
-                <a v-on:click='register_link_click()'><router-link to="/login"  id="register-form-link">Register</router-link></a>
+                <a v-on:click='registerLinkClick()'><router-link to="/login" id="register-form-link">Register</router-link></a>
               </div>
             </div>
             <hr>
@@ -89,7 +89,7 @@ export default {
     }
   },
   methods: {
-    set_msg: function () {
+    setMsg: function () {
       if (this.$route.params.errors === 401 || this.$route.params.errors === 403) {
         this.redirected = true
         this.msg = 'You have to login to see this page.'
@@ -131,14 +131,14 @@ export default {
         this.msg = 'Passwords do not match.'
       }
     },
-    login_link_click: function (e) {
+    loginLinkClick: function (e) {
       $('#login-form').delay(100).fadeIn(100)
       $('#register-form').fadeOut(100)
       $('#register-form-link').removeClass('active')
       $('#login-form-link').addClass('active')
       e.preventDefault()
     },
-    register_link_click: function (e) {
+    registerLinkClick: function (e) {
       $('#register-form').delay(100).fadeIn(100)
       $('#login-form').fadeOut(100)
       $('#login-form-link').removeClass('active')
@@ -147,7 +147,7 @@ export default {
     }
   },
   created: function () {
-    this.set_msg()
+    this.setMsg()
   }
 }
 </script>

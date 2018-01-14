@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Navbar :title="title"></Navbar>
-    <button class="btn btn-success" v-on:click.prevent="swipe()">Start & swipe the best offers!</button>
+    <router-link to="/swipe" class="btn btn-success">Start & swipe the best offers!</router-link>
     <br>
     <router-link to="/profile/my_offers" class="btn btn-info my-offers">My Offers</router-link>
     <br>
@@ -20,16 +20,8 @@
     },
     data () {
       return {
-        title: 'Home',
+        title: 'Home'
       }
-    },
-    methods: {
-      swipe: function () {
-        this.$router.push({ name: 'Swipe' })
-      }
-    },
-    created: function () {
-      this.set_msg()
     }
   }
 </script>
