@@ -16,14 +16,14 @@ import MyFormations from '@/pages/MyFormations'
 Vue.use(VueRouter)
 Vue.use(VueCookies)
 Vue.use(VueResource)
-Vue.http.options.root = 'https://germoon.nebulae.co/' // Si Django tourne en local : 'http://localhost:8000/api/'
+Vue.http.options.root = 'https://germoon.nebulae.co/' // Si Django tourne en local : */ 'http://localhost:8000/'
 Vue.http.interceptors.push(function (request, next) {
   if (Vue.cookies.get('token') !== null) {
     request.headers.set('Authorization', 'Token ' + Vue.cookies.get('token'))
   }
   next(function (resp) {
-    if (resp.status === 401 || resp.status === 403 ) {
-      this.$router.push({ name: 'Login', params: { errors: 401 } })
+    if (resp.status === 401 || resp.status === 403) {
+      this.$router.push({ name: 'Login', params: { errors: resp.status } })
     }
   })
 })

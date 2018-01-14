@@ -53,7 +53,7 @@
           function (resp) {
             this.cards_ids += resp.body.map(card => card.id.toString())
           },
-          function (resp){
+          function (resp) {
             this.msg = resp.statusText
           }
         )

@@ -112,7 +112,7 @@
           desired_max_salary: this.max_salary
         }
         this.$http.put(url, body).then(
-          function () { alert("Changes saved!")},
+          function () { alert('Changes saved!') },
           function (err) {
             if (err.status === 400) {
               this.msg = err.body.detail
