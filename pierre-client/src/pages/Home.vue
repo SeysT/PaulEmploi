@@ -4,6 +4,9 @@
     <button class="btn btn-success" v-on:click.prevent="swipe()">Start & swipe the best offers!</button>
     <br>
     <router-link to="/profile/my_offers" class="btn btn-info my-offers">My Offers</router-link>
+    <br>
+    <br>
+    <router-link to="/profile/my_formations" class="btn btn-info my-offers">My Formations</router-link>
   </div>
 </template>
 

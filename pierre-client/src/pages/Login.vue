@@ -149,6 +149,7 @@ export default {
     this.set_msg()
   }
 }
+}
 </script>
 
 <style scoped>

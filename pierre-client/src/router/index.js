@@ -8,7 +8,6 @@ import Home from '@/pages/Home'
 import Login from '@/pages/Login'
 import MyOffers from '@/pages/MyOffers'
 import NotFound from '@/pages/NotFound'
-<<<<<<< pierre-client/src/router/index.js
 import Profile from '@/pages/Profile'
 import Recover from '@/pages/Recover'
 import Swipe from '@/pages/Swipe'
