@@ -1,8 +1,9 @@
 <template>
-    <div class="container">
-      <div class="msg">{{ msg }}</div>
-      <div class="container">
-      <div class="row">
+  <div class="container">
+    <div class="msg">
+      {{ msg }}
+    </div>
+    <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-login">
           <div class="panel-heading">
@@ -77,69 +78,68 @@
       </div>
     </div>
   </div>
-  </div>
 </template>
 
 <script>
 import Navbar from '../components/Navbar.vue'
 
 export default {
-    name: 'Login',
-    components: {
-      Navbar
-    },
-    data () {
-      return {
-        title: 'Login',
-        username: '',
-        password: '',
-        msg: '',
-        redirected: false
+  name: 'Login',
+  components: {
+    Navbar
+  },
+  data () {
+    return {
+      title: 'Login',
+      username: '',
+      password: '',
+      msg: '',
+      redirected: false
+    }
+  },
+  methods: {
+    set_msg: function () {
+      if (this.$route.params.errors === 401) {
+        this.redirected = true
+        this.msg = 'You have to login to see this page.'
       }
     },
-    methods: {
-        set_msg: function () {
-            if (this.$route.params.errors === 401) {
-              this.redirected = true
-              this.msg = 'You have to login to see this page.'
-            }
-        },
-        login: function () {
-            let url = 'auth/get-token/'
-            let body = {
-              username: this.$data.username,
-              password: this.$data.password
-            }
-            this.$http.post(url, body).then(function (resp) {
-              this.$cookies.set('token', resp.body.token)
-              if (this.redirected) {
-                this.$router.go(-1)
-              } else {
-                this.$router.push({ name: 'Swipe' })
-              }
-            })
-        },
-        register: function () {
-          console.log('register\'s working')
-        },
-        login_link_click: function (e) {
-          $('#login-form').delay(100).fadeIn(100)
-          $('#register-form').fadeOut(100)
-          $('#register-form-link').removeClass('active')
-          $('#login-form-link').addClass('active')
-          e.preventDefault()
-        },
-        register_link_click: function (e) {
-          $('#register-form').delay(100).fadeIn(100)
-          $('#login-form').fadeOut(100)
-          $('#login-form-link').removeClass('active')
-          $('#register-form-link').addClass('active')
-          e.preventDefault()
+    login: function () {
+      let url = 'auth/get-token/'
+      let body = {
+        username: this.$data.username,
+        password: this.$data.password
+      }
+      this.$http.post(url, body).then(function (resp) {
+        this.$cookies.set('token', resp.body.token)
+        if (this.redirected) {
+          this.$router.go(-1)
+        } else {
+          this.$router.push({ name: 'Swipe' })
         }
+      })
     },
-    created: function () {
-      this.set_msg()
+    register: function () {
+      console.log('register\'s working')
+    },
+    login_link_click: function (e) {
+      $('#login-form').delay(100).fadeIn(100)
+      $('#register-form').fadeOut(100)
+      $('#register-form-link').removeClass('active')
+      $('#login-form-link').addClass('active')
+      e.preventDefault()
+    },
+    register_link_click: function (e) {
+      $('#register-form').delay(100).fadeIn(100)
+      $('#login-form').fadeOut(100)
+      $('#login-form-link').removeClass('active')
+      $('#register-form-link').addClass('active')
+      e.preventDefault()
     }
+  },
+  created: function () {
+    this.set_msg()
+  }
 }
 </script>
 
