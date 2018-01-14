@@ -22,15 +22,13 @@
               <div class="col-lg-12">
                 <form id="login-form" method="post" role="form" style="display: block;">
                   <div class="form-group">
-                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username"
-                    value="" v-model='username'>
+                    <input type="email" tabindex="1" class="form-control" placeholder="Email Address" v-model='email'>
                   </div>
                   <div class="form-group">
-                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password"
-                    v-model='password'>
+                    <input type="password" tabindex="2" class="form-control" placeholder="Password" v-model='password'>
                   </div>
                   <div class="form-group text-center">
-                    <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                    <input type="checkbox" tabindex="3" id="remember">
                     <label for="remember"> Remember Me</label>
                   </div>
                   <div class="form-group">
@@ -52,16 +50,13 @@
                 </form>
                 <form id="register-form" method="post" role="form" style="display: none;">
                   <div class="form-group">
-                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                    <input type="email" tabindex="1" class="form-control" placeholder="Email Address" v-model="email">
                   </div>
                   <div class="form-group">
-                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                    <input type="password" tabindex="2" class="form-control" placeholder="Password" v-model="password">
                   </div>
                   <div class="form-group">
-                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-                  </div>
-                  <div class="form-group">
-                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                    <input type="password" tabindex="2" class="form-control" placeholder="Confirm Password" v-model="confirmPassword">
                   </div>
                   <div class="form-group">
                     <div class="row">
@@ -91,8 +86,9 @@ export default {
   data () {
     return {
       title: 'Login',
-      username: '',
+      email: '',
       password: '',
+      confirmPassword: '',
       msg: '',
       redirected: false
     }
@@ -107,7 +103,7 @@ export default {
     login: function () {
       let url = 'auth/get-token/'
       let body = {
-        username: this.$data.username,
+        username: this.$data.email,
         password: this.$data.password
       }
       this.$http.post(url, body).then(function (resp) {
@@ -120,7 +116,25 @@ export default {
       })
     },
     register: function () {
-      console.log('register\'s working')
+      if (this.$data.password === this.$data.confirmPassword) {
+        let url = 'api/users/'
+        let body = {
+          email: this.$data.email,
+          password: this.$data.password
+        }
+        this.$http.post(url, body).then(
+          function () {
+            this.login()
+          },
+          function (err) {
+            if (err.status === 400) {
+              this.msg = err.body.detail
+            }
+          }
+        )
+      } else {
+        this.msg = 'Passwords do not match.'
+      }
     },
     login_link_click: function (e) {
       $('#login-form').delay(100).fadeIn(100)
@@ -146,6 +160,7 @@ export default {
 <style scoped>
 .msg {
   color: red;
+  margin-bottom: 1em;
 }
 
 </style>
