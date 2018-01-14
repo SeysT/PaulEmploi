@@ -38,14 +38,20 @@
       return {
         title: 'Swipe',
         cards_ids: ['1', '2', '3'],
-        isFormation: false
+        isFormation: false,
       }
     },
     methods: {
       get_ids: function (url) {
-        this.$http.get(url).then(function (resp) {
-          this.cards_ids += resp.body.map(card => card.id.toString())
-        })
+        this.$http.get(url).then(
+          function (resp) {
+            this.cards_ids += resp.body.map(card => card.id.toString())
+          },
+          function (resp){
+            console.log(resp.status)
+            // to get the error status code
+          }
+        )
       },
       get_offers_ids: function () {
         let url = 'api/profile/offers_to_show/'

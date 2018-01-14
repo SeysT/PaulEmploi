@@ -123,9 +123,10 @@
   height: 450px;
   overflow: auto;
 
-  border: 2px solid #96b7ff;
+  border: 0.5px solid rgb(52, 182, 93);
   border-radius: 4px;
-  background-color: #eff4ff;
+  background-color: rgb(246, 255, 249);
+  box-shadow: 2px 1.5px rgb(27, 87, 45);
 
   visibility: hidden;
 }
