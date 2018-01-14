@@ -1,6 +1,8 @@
 <template>
   <div class="container">
     <Navbar :title="title"></Navbar>
+    <router-link to="/profile/my_offers">My Offers</router-link>
+    <router-link to="/profile/my_formations">My Formations</router-link>
     <div class="panel panel-body">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -36,6 +38,10 @@
                 </select>
                 <br>
                 <button name='save' class="btn btn-large btn-block form-control btn btn-success" v-on:click.prevent="save_profile()">Save</button>
+              <br>
+              <div class="msg">
+                {{ msg }}
+              </div>
             </div>
           </form>
         </div>
@@ -55,6 +61,7 @@
     data () {
       return {
         title: 'Profile',
+        msg: '',
         available_interests: [],
         available_degrees: [],
         available_skills: [],
@@ -71,9 +78,6 @@
       }
     },
     methods: {
-      my_offers: function () {
-        this.$router.push({ name: 'MyOffers' })
-      },
       get_available: function () {
         let url = 'api/fields/'
         this.$http.get(url).then(function (resp) {
@@ -109,8 +113,14 @@
           desired_min_salary: this.min_salary,
           desired_max_salary: this.max_salary
         }
-        this.$http.put(url, body)
-        alert("Changes saved!")
+        this.$http.put(url, body).then(
+          function () { alert("Changes saved!")},
+          function (err) {
+            if (err.status === 400) {
+              this.msg = err.body.detail
+            }
+          }
+        )
       }
     },
     created: function () {
@@ -125,5 +135,8 @@
   margin-bottom : 0.5em;
   margin-top : 0.5em;
   color : #029f5b;
+}
+.msg {
+  color: red;
 }
 </style>

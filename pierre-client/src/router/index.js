@@ -8,15 +8,18 @@ import Home from '@/pages/Home'
 import Login from '@/pages/Login'
 import MyOffers from '@/pages/MyOffers'
 import NotFound from '@/pages/NotFound'
+<<<<<<< pierre-client/src/router/index.js
 import Profile from '@/pages/Profile'
 import Recover from '@/pages/Recover'
 import Swipe from '@/pages/Swipe'
+import MyFormations from '@/pages/MyFormations'
 
 Vue.use(VueRouter)
 Vue.use(VueCookies)
 Vue.use(VueResource)
 
 Vue.http.options.root = 'https://germoon.nebulae.co/' // Si Django tourne en local : 'http://localhost:8000/api/'
+
 Vue.http.interceptors.push(function (request, next) {
   if (Vue.cookies.get('token') !== null) {
     request.headers.set('Authorization', 'Token ' + Vue.cookies.get('token'))
@@ -64,6 +67,11 @@ export default new VueRouter({
       path: '/profile/my_offers',
       name: 'MyOffers',
       component: MyOffers
+    },
+    {
+      path: '/profile/my_formations',
+      name: 'MyFormations',
+      component: MyFormations
     }
   ]
 })
