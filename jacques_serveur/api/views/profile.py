@@ -20,7 +20,7 @@ class ProfileViewSet(viewsets.ViewSet):
         try:
             profile = request.user.profile
         except Profile.DoesNotExist:
-            return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({ 'detail': 'Profile not found.' }, status=status.HTTP_404_NOT_FOUND)
         return Response(self.serializer_class(profile).data)
 
     # PUT '/api/profile/'
@@ -29,36 +29,99 @@ class ProfileViewSet(viewsets.ViewSet):
             profile = request.user.profile
             body = json.loads(request.body.decode())
         except Profile.DoesNotExist:
-            return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({ 'detail': 'Profile not found.' }, status=status.HTTP_404_NOT_FOUND)
 
-        # for item in args.keys():
-        #     try:
-        #         setattr(profile, item, args[item])
-        #     except ValueError or AttributeError:
-        #         pass
+        try:
+            profile.desired_location = Location.objects.get(city_name=body['desired_location'])
+        except KeyError:
+            pass
+        except Location.DoesNotExist:
+            return Response(
+                { 'detail': 'Please enter a valid city name. See http://germoon.nebulae.co/api/fields for more info.' },
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-        profile.desired_location = Location.objects.get(city_name=body['desired_location'])
-        profile.desired_contract = Contract.objects.get(name=body['desired_contract'])
+        try:
+            profile.desired_contract = Contract.objects.get(name=body['desired_contract'])
+        except KeyError:
+            pass
+        except Contract.DoesNotExist:
+            return Response(
+                { 'detail': 'Please enter a valid contract type. See http://germoon.nebulae.co/api/fields for more info. '},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-        profile.interests = Interest.objects.none()
-        for item in body['interests']:
-            item = Interest.objects.get(name=item)
-            profile.interests.add(item)
-        profile.degrees = Degree.objects.none()
-        for item in body['degrees']:
-            item = Degree.objects.get(name=item)
-            profile.degrees.add(item)
-        profile.skills = Skill.objects.none()
-        for item in body['skills']:
-            item = Skill.objects.get(name=item)
-            profile.skills.add(item)
-        profile.languages = Language.objects.none()
-        for item in body['languages']:
-            item = Language.objects.get(name=item)
-            profile.languages.add(item)
+        try:
+            items_list = body['interests']
+            profile.interests = Interest.objects.none()
+            for item in items_list:
+                try:
+                    item = Interest.objects.get(name=item)
+                    profile.interests.add(item)
+                except Interest.DoesNotExist:
+                    return Response(
+                        { 'detail': 'Please enter valid interests. See http://germoon.nebulae.co/api/fields for more info. '},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+        except KeyError:
+            pass
 
-        profile.desired_min_salary = body['desired_min_salary']
-        profile.desired_max_salary = body['desired_max_salary']
+        try:
+            items_list = body['degrees']
+            profile.degrees = Degree.objects.none()
+            for item in items_list:
+                try:
+                    item = Degree.objects.get(name=item)
+                    profile.degrees.add(item)
+                except Degree.DoesNotExist:
+                    return Response(
+                        {'detail': 'Please enter valid degrees. See http://germoon.nebulae.co/api/fields for more info. '},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+        except KeyError:
+            pass
+
+        try:
+            items_list = body['skills']
+            profile.skills = Skill.objects.none()
+            for item in items_list:
+                try:
+                    item = Skill.objects.get(name=item)
+                    profile.skills.add(item)
+                except Skill.DoesNotExist:
+                    return Response(
+                        {'detail': 'Please enter valid skills. See http://germoon.nebulae.co/api/fields for more info. '},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+        except KeyError:
+            pass
+
+        try:
+            items_list = body['languages']
+            profile.languages = Language.objects.none()
+            for item in items_list:
+                try:
+                    item = Language.objects.get(name=item)
+                    profile.languages.add(item)
+                except Language.DoesNotExist:
+                    return Response(
+                        {'detail': 'Please enter valid languages. See http://germoon.nebulae.co/api/fields for more info. '},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+        except KeyError:
+            pass
+
+        try:
+            if isinstance(body['desired_min_salary'], int):
+                profile.desired_min_salary = body['desired_min_salary']
+        except KeyError:
+            pass
+
+        try:
+            if isinstance(body['desired_max_salary'], int):
+                profile.desired_max_salary = body['desired_max_salary']
+        except KeyError:
+            pass
 
         profile.save()
         return Response(self.serializer_class(profile).data)

@@ -35,8 +35,11 @@
                 <select class="form-control" v-model="contract">
                   <option v-for="contract in available_contracts">{{ contract }}</option>
                 </select>
-                <br>
-                <button name='save' class="btn btn-large btn-block form-control btn btn-register" v-on:click.prevent="save_profile()">Save</button>
+              <br>
+              <div class="msg">
+                {{ msg }}
+              </div>
+              <button name='save' class="btn btn-large btn-block form-control btn btn-register" v-on:click.prevent="save_profile()">Save</button>
             </div>
           </form>
         </div>
@@ -56,6 +59,7 @@
     data () {
       return {
         title: 'Profile',
+        msg: '',
         available_interests: [],
         available_degrees: [],
         available_skills: [],
@@ -110,7 +114,14 @@
           desired_min_salary: this.min_salary,
           desired_max_salary: this.max_salary
         }
-        this.$http.put(url, body)
+        this.$http.put(url, body).then(
+          function () { return null },
+          function (err) {
+            if (err.status === 400) {
+              this.msg = err.body.detail
+            }
+          }
+        )
       }
     },
     created: function () {
@@ -125,5 +136,8 @@
   margin-bottom : 0.5em;
   margin-top : 0.5em;
   color : #029f5b;
+}
+.msg {
+  color: red;
 }
 </style>
