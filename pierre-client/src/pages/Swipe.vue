@@ -51,7 +51,7 @@
       getIds: function (url) {
         this.$http.get(url).then(
           function (resp) {
-            this.cards_ids += resp.body.map(card => card.id.toString())
+            this.cardsIds += resp.body.map(card => card.id.toString())
           },
           function (resp) {
             this.msg = resp.statusText
@@ -68,7 +68,7 @@
         this.getIds(url)
       },
       action: function (like) {
-        let cardId = this.cards_ids[0]
+        let cardId = this.cardsIds[0]
         let urlStart = this.isFormation ? 'api/formations/' : 'api/offers/'
         let urlEnd = this.isFormation
           ? like
