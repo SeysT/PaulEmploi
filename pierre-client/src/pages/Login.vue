@@ -98,7 +98,7 @@ export default {
         login: function () {
             let url = 'auth/get-token/'
             let body = {
-              username: this.$data.username,
+              username: this.$data.email,
               password: this.$data.password
             }
             this.$http.post(url, body).then(function (resp) {

@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -23,8 +24,8 @@ from jacques_serveur.views.registration import register
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^auth/get-token/', obtain_auth_token),
-    url(r'^auth/register/', register),
+    url(r'^auth/get-token/', ensure_csrf_cookie(obtain_auth_token)),
+    url(r'^auth/register/', ensure_csrf_cookie(register)),
     url(r'^auth/', include('rest_framework.urls', namespace='django_rest_framework')),
     url(r'^api/', include('api.urls')),
 ]
