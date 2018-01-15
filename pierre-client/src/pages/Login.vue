@@ -27,23 +27,10 @@
                   <div class="form-group">
                     <input type="password" tabindex="2" class="form-control" placeholder="Password" v-model='password'>
                   </div>
-                  <div class="form-group text-center">
-                    <input type="checkbox" tabindex="3" id="remember">
-                    <label for="remember"> Remember Me</label>
-                  </div>
                   <div class="form-group">
                     <div class="row">
                       <div class="col-sm-6 col-sm-offset-3">
                         <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In" v-on:click.prevent='login()'>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <div class="text-center">
-                          <a tabindex="5" class="forgot-password"><router-link to="/recover">Forgot Password?</router-link></a>
-                        </div>
                       </div>
                     </div>
                   </div>
