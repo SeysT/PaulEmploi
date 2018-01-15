@@ -12,11 +12,14 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <div class="navbar-text"><strong>{{ title }}</strong></div>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right" :class="{'navbar-right--hidden': !loggedIn}">
             <li><router-link to="/profile/my_offers">My Offers</router-link></li>
             <li><router-link to="/profile/my_formations">My Formations</router-link></li>
             <li><router-link to="/profile">Profile</router-link></li>
             <li class="navbar-btn btn btn-danger" v-on:click.prevent="logout()">Logout</li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right" :class="{'navbar-right--hidden': loggedIn}">
+            <li class="navbar-btn btn btn-primary" v-on:click.prevent="login()">Login</li>
           </ul>
         </div>
       </div>
@@ -33,12 +36,20 @@
         default: ''
       }
     },
+    data () {
+      return {
+        loggedIn: this.$cookies.get('token') !== null
+      }
+    },
     methods: {
+      login: function () {
+        this.$router.push({ name: 'Login' })
+      },
       logout: function () {
-        let url = 'auth/logout'
+        let url = 'auth/logout/'
         this.$http.get(url).then(function () {
           this.$cookies.remove('token')
-          this.$router.push({ name: 'Home', params: { msg: 'You have been successfully logged out.' } })
+          this.$router.push({ name: 'Login' })
         })
       }
     }
@@ -46,5 +57,7 @@
 </script>
 
 <style scoped>
-
+.navbar-right--hidden {
+  display: none;
+}
 </style>
