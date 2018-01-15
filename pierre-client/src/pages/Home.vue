@@ -20,19 +20,22 @@
     },
     data () {
       return {
-        title: 'Home'
+        title: 'Home',
       }
     },
     methods: {
       swipe: function () {
         this.$router.push({ name: 'Swipe' })
       }
+    },
+    created: function () {
+      this.set_msg()
     }
   }
 </script>
 
 <style scoped>
-.my-offers{
+.my-offers {
   position: relative;
   top: 30px;
 }
