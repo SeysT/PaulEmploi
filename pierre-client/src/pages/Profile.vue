@@ -12,27 +12,27 @@
                 <!-- TODO: Ajouter de la validation-->
               <label class="pull-left">Interests:</label>
                 <select class="form-control" v-model="interests" multiple>
-                  <option v-for="interest in available_interests">{{ interest }}</option>
+                  <option v-for="interest in availableInterests">{{ interest }}</option>
                 </select>
               <label class="pull-left">Degrees:</label>
                 <select class="form-control" v-model="degrees" multiple>
-                  <option v-for="degree in available_degrees">{{ degree }}</option>
+                  <option v-for="degree in availableDegrees">{{ degree }}</option>
                 </select>
               <label class="pull-left">Skills:</label>
                 <select class="form-control" v-model="skills" multiple>
-                  <option v-for="skill in available_skills">{{ skill }}</option>
+                  <option v-for="skill in availableSkills">{{ skill }}</option>
                 </select>
               <label class="pull-left">Languages :</label>
                 <select class="form-control" v-model="languages" multiple>
-                  <option v-for="language in available_languages">{{ language }}</option>
+                  <option v-for="language in availableLanguages">{{ language }}</option>
                 </select>
               <label class="pull-left">Minimum salary (K euros):</label>
-                <input class="form-control" type="number" v-model="min_salary">
+                <input class="form-control" type="number" v-model="minSalary">
               <label class="pull-left">Maximum salary (K euros):</label>
-                <input class="form-control" type="number" v-model="max_salary">
+                <input class="form-control" type="number" v-model="maxSalary">
               <label class="pull-left">Contract type:</label>
                 <select class="form-control" v-model="contract">
-                  <option v-for="contract in available_contracts">{{ contract }}</option>
+                  <option v-for="contract in availableContracts">{{ contract }}</option>
                 </select>
                 <br>
                 <button name='save' class="btn btn-large btn-block form-control btn btn-success" v-on:click.prevent="saveProfile()">Save</button>
