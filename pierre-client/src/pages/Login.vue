@@ -88,14 +88,21 @@ export default {
         username: this.$data.email,
         password: this.$data.password
       }
-      this.$http.post(url, body).then(function (resp) {
-        this.$cookies.set('token', resp.body.token)
-        if (this.redirected) {
-          this.$router.go(-1)
-        } else {
-          this.$router.push({ name: 'Home' })
+      this.$http.post(url, body).then(
+        function (resp) {
+          this.$cookies.set('token', resp.body.token)
+          if (this.redirected) {
+            this.$router.go(-1)
+          } else {
+            this.$router.push({ name: 'Home' })
+          }
+        },
+        function (err) {
+          if (err.status === 400) {
+            this.msg = err.body.detail
+          }
         }
-      })
+      )
     },
     register: function () {
       if (this.$data.password === this.$data.confirmPassword) {
