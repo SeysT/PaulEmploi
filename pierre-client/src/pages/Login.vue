@@ -76,46 +76,41 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
-
 export default {
-  name: 'Login',
-  components: {
-    Navbar
-  },
-  data () {
-    return {
-      title: 'Login',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      msg: '',
-      redirected: false
-    }
-  },
-  methods: {
-    set_msg: function () {
-      if (this.$route.params.errors === 401) {
-        this.redirected = true
-        this.msg = 'You have to login to see this page.'
-      }
-    },
-    login: function () {
-      let url = 'auth/get-token/'
-      let body = {
-        username: this.$data.email,
-        password: this.$data.password
-      }
-      this.$http.post(url, body).then(function (resp) {
-        this.$cookies.set('token', resp.body.token)
-        if (this.redirected) {
-          this.$router.go(-1)
-        } else {
-          this.$router.push({ name: 'Swipe' })
+    name: 'Login',
+    data () {
+        return {
+          title: 'Login',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          msg: '',
+          redirected: false
         }
-      })
-    },
-    register: function () {
+      },
+    methods: {
+        set_msg: function () {
+            if (this.$route.params.errors === 401) {
+              this.redirected = true
+              this.msg = 'You have to login to see this page.'
+            }
+        },
+        login: function () {
+            let url = 'auth/get-token/'
+            let body = {
+              username: this.$data.username,
+              password: this.$data.password
+            }
+            this.$http.post(url, body).then(function (resp) {
+              this.$cookies.set('token', resp.body.token)
+              if (this.redirected) {
+                this.$router.go(-1)
+              } else {
+                this.$router.push({ name: 'Home' })
+              }
+            })
+        },
+        register: function () {
       if (this.$data.password === this.$data.confirmPassword) {
         let url = 'api/users/'
         let body = {
@@ -136,31 +131,27 @@ export default {
         this.msg = 'Passwords do not match.'
       }
     },
-    login_link_click: function (e) {
-      $('#login-form').delay(100).fadeIn(100)
-      $('#register-form').fadeOut(100)
-      $('#register-form-link').removeClass('active')
-      $('#login-form-link').addClass('active')
-      e.preventDefault()
-    },
-    register_link_click: function (e) {
-      $('#register-form').delay(100).fadeIn(100)
-      $('#login-form').fadeOut(100)
-      $('#login-form-link').removeClass('active')
-      $('#register-form-link').addClass('active')
-      e.preventDefault()
-    }
+        login_link_click: function (e) {
+          $('#login-form').delay(100).fadeIn(100)
+          $('#register-form').fadeOut(100)
+          $('#register-form-link').removeClass('active')
+          $('#login-form-link').addClass('active')
+          e.preventDefault()
+        },
+        register_link_click: function (e) {
+          $('#register-form').delay(100).fadeIn(100)
+          $('#login-form').fadeOut(100)
+          $('#login-form-link').removeClass('active')
+          $('#register-form-link').addClass('active')
+          e.preventDefault()
   },
   created: function () {
     this.set_msg()
   }
 }
+}
 </script>
 
 <style scoped>
-.msg {
-  color: red;
-  margin-bottom: 1em;
-}
 
 </style>

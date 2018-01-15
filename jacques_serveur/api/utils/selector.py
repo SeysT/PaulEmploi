@@ -54,17 +54,21 @@ class OfferSelector(Selector):
         try:
             offer_min_salary = offer.min_salary
             score_min_salary = 1 \
-                if (offer_min_salary <= self.desired_min_salary or offer.min_salary == None) \
+                if (offer_min_salary >= self.desired_min_salary or offer.min_salary is None) \
                 else 0.1
         except AttributeError:
+            score_min_salary = 0.1
+        except TypeError:
             score_min_salary = 0.1
 
         try:
             offer_max_salary = offer.max_salary
             score_max_salary = 1 \
-                if (offer_max_salary <= self.desired_max_salary or offer.max_salary == None) \
+                if (offer_max_salary <= self.desired_max_salary or offer.max_salary is None) \
                 else 0.1
         except AttributeError:
+            score_max_salary = 0.1
+        except TypeError:
             score_max_salary = 0.1
 
         # We select an offer if it respects the kind of contract desired

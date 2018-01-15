@@ -1,8 +1,6 @@
 <template>
   <div class="container">
     <Navbar :title="title"></Navbar>
-    <router-link to="/profile/my_offers">My Offers</router-link>
-    <router-link to="/profile/my_formations">My Formations</router-link>
     <div class="panel panel-body">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -36,11 +34,12 @@
                 <select class="form-control" v-model="contract">
                   <option v-for="contract in available_contracts">{{ contract }}</option>
                 </select>
+                <br>
+                <button name='save' class="btn btn-large btn-block form-control btn btn-success" v-on:click.prevent="save_profile()">Save</button>
               <br>
               <div class="msg">
                 {{ msg }}
               </div>
-              <button name='save' class="btn btn-large btn-block form-control btn btn-register" v-on:click.prevent="save_profile()">Save</button>
             </div>
           </form>
         </div>
@@ -113,7 +112,7 @@
           desired_max_salary: this.max_salary
         }
         this.$http.put(url, body).then(
-          function () { return null },
+          function () { alert("Changes saved!")},
           function (err) {
             if (err.status === 400) {
               this.msg = err.body.detail

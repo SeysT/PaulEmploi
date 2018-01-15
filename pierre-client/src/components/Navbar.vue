@@ -13,13 +13,11 @@
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
               <li><router-link to="/">Home</router-link></li>
-              <li><router-link to="profile">Profile</router-link></li>
+              <li><router-link to="/profile">Profile</router-link></li>
             </ul>
           </div>
         </div>
     </nav>
-    <!-- <router-link to="/">Home</router-link> -->
-    <!-- <router-link to="profile">Profile</router-link> -->
   </div>
 </template>
 
@@ -32,7 +30,7 @@
         default: ''
       }
     }
-  }
+    }
 </script>
 
 <style scoped>
