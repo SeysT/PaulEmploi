@@ -9,10 +9,10 @@
           <div class="panel-heading">
             <div class="row">
               <div class="col-xs-6">
-                <a v-on:click='login_link_click()' ><router-link to="/login" class="active" id="login-form-link">Login</router-link></a>
+                <a v-on:click='loginLinkClick()' ><router-link to="/login" class="active" id="login-form-link">Login</router-link></a>
               </div>
               <div class="col-xs-6">
-                <a v-on:click='register_link_click()'><router-link to="/login"  id="register-form-link">Register</router-link></a>
+                <a v-on:click='registerLinkClick()'><router-link to="/login" id="register-form-link">Register</router-link></a>
               </div>
             </div>
             <hr>
@@ -64,40 +64,40 @@
 
 <script>
 export default {
-    name: 'Login',
-    data () {
-        return {
-          title: 'Login',
-          email: '',
-          password: '',
-          confirmPassword: '',
-          msg: '',
-          redirected: false
+  name: 'Login',
+  data () {
+    return {
+      title: 'Login',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      msg: '',
+      redirected: false
+    }
+  },
+  methods: {
+    setMsg: function () {
+      if (this.$route.params.errors === 401 || this.$route.params.errors === 403) {
+        this.redirected = true
+        this.msg = 'You have to login to see this page.'
+      }
+    },
+    login: function () {
+      let url = 'auth/get-token/'
+      let body = {
+        username: this.$data.email,
+        password: this.$data.password
+      }
+      this.$http.post(url, body).then(function (resp) {
+        this.$cookies.set('token', resp.body.token)
+        if (this.redirected) {
+          this.$router.go(-1)
+        } else {
+          this.$router.push({ name: 'Home' })
         }
-      },
-    methods: {
-        set_msg: function () {
-            if (this.$route.params.errors === 401) {
-              this.redirected = true
-              this.msg = 'You have to login to see this page.'
-            }
-        },
-        login: function () {
-            let url = 'auth/get-token/'
-            let body = {
-              username: this.$data.email,
-              password: this.$data.password
-            }
-            this.$http.post(url, body).then(function (resp) {
-              this.$cookies.set('token', resp.body.token)
-              if (this.redirected) {
-                this.$router.go(-1)
-              } else {
-                this.$router.push({ name: 'Home' })
-              }
-            })
-        },
-        register: function () {
+      })
+    },
+    register: function () {
       if (this.$data.password === this.$data.confirmPassword) {
         let url = 'api/users/'
         let body = {
@@ -118,24 +118,24 @@ export default {
         this.msg = 'Passwords do not match.'
       }
     },
-        login_link_click: function (e) {
-          $('#login-form').delay(100).fadeIn(100)
-          $('#register-form').fadeOut(100)
-          $('#register-form-link').removeClass('active')
-          $('#login-form-link').addClass('active')
-          e.preventDefault()
-        },
-        register_link_click: function (e) {
-          $('#register-form').delay(100).fadeIn(100)
-          $('#login-form').fadeOut(100)
-          $('#login-form-link').removeClass('active')
-          $('#register-form-link').addClass('active')
-          e.preventDefault()
+    loginLinkClick: function (e) {
+      $('#login-form').delay(100).fadeIn(100)
+      $('#register-form').fadeOut(100)
+      $('#register-form-link').removeClass('active')
+      $('#login-form-link').addClass('active')
+      e.preventDefault()
+    },
+    registerLinkClick: function (e) {
+      $('#register-form').delay(100).fadeIn(100)
+      $('#login-form').fadeOut(100)
+      $('#login-form-link').removeClass('active')
+      $('#register-form-link').addClass('active')
+      e.preventDefault()
+    }
   },
   created: function () {
-    this.set_msg()
+    this.setMsg()
   }
-}
 }
 </script>
 

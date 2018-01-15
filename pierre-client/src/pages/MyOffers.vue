@@ -3,13 +3,13 @@
     <Navbar :title="title"></Navbar>
     <div class="wrap">
       <div class="cards">
-        <Card v-for="id in my_ids" 
-            :card_id="id" 
-            :is_formation=false 
+        <Card v-for="id in myIds"
+            :card-id="id"
+            :is-formation=false
             :key="id"
-            class="cards_item"></Card>
-      </div> 
-    </div> 
+            class="cards-item"></Card>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -26,25 +26,25 @@
     data () {
       return {
         title: 'My Offers',
-        my_ids: ['1', '2', '3']
+        myIds: []
       }
     },
     methods: {
-      get_my_ids: function () {
+      getMyIds: function () {
         let url = 'api/profile/accepted_offers'
         this.$http.get(url).then(function (resp) {
-          this.my_ids = resp.body.map(offer => offer.id.toString())
+          this.myIds = resp.body.map(offer => offer.id.toString())
         })
       }
     },
     created: function () {
-      this.get_my_ids()
+      this.getMyIds()
     }
   }
 </script>
 
 <style scoped>
-.cards_item{
+.cards-item {
   visibility: visible;
   position: relative;
   margin: 15px;

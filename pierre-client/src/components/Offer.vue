@@ -6,9 +6,9 @@
     <p>Language: {{ language }}</p>
     <p>Location: {{ location }}</p>
     <p>Degree: {{ degree }}</p>
-    <p>Minimum Salary: {{ min_salary }}</p>
-    <p>Maximum Salary: {{ max_salary }}</p>
-    <p>Contract Type: {{ contract_type }}</p>
+    <p>Minimum Salary: {{ minSalary }}</p>
+    <p>Maximum Salary: {{ maxSalary }}</p>
+    <p>Contract Type: {{ contractType }}</p>
   </div>
 </template>
 
@@ -16,7 +16,7 @@
   export default {
     name: 'Offer',
     props: {
-      offer_id: {
+      offerId: {
         type: String,
         default: '1'
       }
@@ -28,13 +28,13 @@
         language: '',
         location: '',
         degree: '',
-        min_salary: 0,
-        max_salary: 0,
-        contract_type: ''
+        minSalary: 0,
+        maxSalary: 0,
+        contractType: ''
       }
     },
     methods: {
-      get_offer: function (id) {
+      getOffer: function (id) {
         let url = 'api/offers/' + id + '/'
         this.$http.get(url).then(function (resp) {
           this.title = resp.body.title
@@ -42,12 +42,12 @@
           this.language = resp.body.language
           this.location = resp.body.location
           this.degree = resp.body.degree
-          this.contract_type = resp.body.contract_type
+          this.contractType = resp.body.contract_type
         })
       }
     },
     created: function () {
-      this.get_offer(this.offer_id)
+      this.getOffer(this.offerId)
     }
   }
 </script>

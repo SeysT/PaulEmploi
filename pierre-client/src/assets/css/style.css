@@ -10,7 +10,7 @@
   border-color: #fff;
   text-align:center;
 }
-.panel-login>.panel-heading a{
+.panel-login>.panel-heading a {
   text-decoration: none;
   color: #666;
   font-weight: bold;
@@ -19,11 +19,11 @@
   -moz-transition: all 0.1s linear;
   transition: all 0.1s linear;
 }
-.panel-login>.panel-heading a.active{
+.panel-login>.panel-heading a.active {
   color: #029f5b;
   font-size: 18px;
 }
-.panel-login>.panel-heading hr{
+.panel-login>.panel-heading hr {
   margin-top: 10px;
   margin-bottom: 0px;
   clear: both;
@@ -76,7 +76,6 @@
   text-decoration: underline;
   color: #666;
 }
-
 .btn-register {
   background-color: #1CB94E;
   outline: none;
@@ -94,7 +93,7 @@
   background-color: #1CA347;
   border-color: #1CA347;
 }
-.wrap{
+.wrap {
   width: 100%;
   height: 100%;
   max-width: 520px;
@@ -104,46 +103,37 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
-.cards{
+.cards {
   position: relative;
   padding: 0;
   margin: 0;
   height: 450px;
-
   list-style-type: none;
 }
-
-.cards_item {
+.cards-item {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-
   height: 450px;
   overflow: auto;
-
   border: 0.5px solid rgb(52, 182, 93);
   border-radius: 4px;
   background-color: rgb(246, 255, 249);
   box-shadow: 2px 1.5px rgb(27, 87, 45);
-
   visibility: hidden;
 }
-
-.cards_item--active {
+.cards-item--active {
   z-index: 1;
   visibility: visible;
   transition: all .4s .1s cubic-bezier(.87,-.41,.19,1.44);
 }
-
 .actions {
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 20px 15px;
 }
-
 .button {
   display: flex;
   justify-content: space-around;
@@ -152,7 +142,6 @@
   display: block;
   width: 63px;
   height: 63px;
-
   background-color: white;
   background-size: 100%;
   background-repeat: no-repeat;
@@ -160,18 +149,14 @@
   border: 0;
   outline: 0;
   cursor: pointer;
-
   transition: all .3s;
 }
-
-.like {
+.btn-like {
   background-image: url(../like.png);
 }
-
-.dislike {
+.btn-dislike {
   background-image: url(../dislike.png);
 }
-
 .msg {
   color: red;
   margin-bottom: 1em;

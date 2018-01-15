@@ -8,7 +8,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><strong>Paul Emploi</strong></a>
+          <a class="navbar-brand" href="/">Paul Emploi</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><router-link to="/">Home</router-link></li>
+            <li><router-link to="/profile">Profile</router-link></li>
+          </ul>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <div class="navbar-text"><strong>{{ title }}</strong></div>
