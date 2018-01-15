@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from api.models.profile import Profile
 from api.models.fields import Location, Contract, Interest, Degree, Skill, Language
 from api.models.offer import Offer, Company
-from api.utils.selector import OfferSelector
+from api.models.formation import Formation
+from api.utils.selector import OfferSelector, FormationSelector
 
 from django.core.management import call_command
 
@@ -62,11 +63,28 @@ class OfferSelectorTest(TestCase):
         )
         self.offer2.skills.add(Skill.objects.create(name='Django'))
         self.offer2.skills.add(Skill.objects.create(name='Deep Learning'))
-        self.offer2.degrees.add(Degree.objects.create(name='Informatique'))
+        self.offer2.degrees.add(Degree.objects.get(name='Informatique'))
         self.offer2.languages.add(Language.objects.create(name='Anglais'))
+
+        self.formation1 = Formation.objects.create(
+            name='Expert conception système',
+            acquired_degree=Degree.objects.create(name='Master en Informatique'),
+            duration='2 ans',
+            location=Location.objects.get(city_name='PARIS 20, ILE-DE-FRANCE, FRANCE'),
+            language=Language.objects.get(name='Francais')
+        )
+        self.formation1.required_skills.add(Skill.objects.get(name='Linux'))
+        self.formation1.acquired_skills.add(Skill.objects.create(name='UML'))
+        self.formation1.acquired_skills.add(Skill.objects.create(name='Test unitaire'))
+        self.formation1.required_degrees.add(Degree.objects.get(name='Informatique'))
 
     def test_offer_selector(self):
         selector = OfferSelector(self.user.profile, [self.offer1, self.offer2])
-        intereting_offers_ids = selector.get_interesting()
-        self.assertTrue(self.offer1.id in intereting_offers_ids)
-        self.assertFalse(self.offer2.id in intereting_offers_ids)
+        interesting_offers_ids = selector.get_interesting()
+        self.assertTrue(self.offer1.id in interesting_offers_ids)
+        self.assertFalse(self.offer2.id in interesting_offers_ids)
+
+    def test_formation_selector(self):
+        selector = FormationSelector(self.user.profile, [self.formation1])
+        interesting_formations_ids = selector.get_interesting()
+        self.assertTrue(self.formation1.id in interesting_formations_ids)

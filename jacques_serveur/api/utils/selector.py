@@ -129,3 +129,56 @@ class FormationSelector(Selector):
         self.languages = profile.languages
         self.interests = profile.interests
         self.degrees = profile.degrees
+
+    def compute_score(self, formation):
+        try:
+            formation_location = formation.location
+            score_location = 1 \
+                if formation_location.city_name == self.desired_location.city_name \
+                else 0.1
+        except AttributeError:
+            score_location = 0.1
+
+        score_language = 0.1
+        for lang in self.languages.all():
+            try:
+                formation_languages = formation.language
+                if lang in formation_languages.all():
+                    score_language += 1
+            except AttributeError:
+                pass
+
+        # Count the number of skills satisfied.
+        # To increase the number of skills that match the profile, we get skills
+        # with similar names (because skills in database are ugly !)
+        score_skills = 0.1
+        for skill in self.skills.all():
+            try:
+                formation_skills = formation.required_skills
+                if formation_skills.filter(name__search=skill.name) or formation_skills.filter(name__icontains=skill.name):
+                    score_skills += 1
+            except AttributeError:
+                pass
+
+        score_degrees = 0.1
+        for degree in self.degrees.all():
+            try:
+                formation_degrees = formation.required_degrees
+                if formation_degrees.filter(name__search=degree.name) or formation_degree.filter(name__icontains=degree.name):
+                    score_degrees += 1
+            except AttributeError:
+                pass
+
+        # Calculating the score, skills are weighted with 5, languages with 1
+        score = score_location * (score_skills * 5 + score_degrees + score_language)
+        print(
+            """=========SCORES========\nLOCATION: {}\nLANGUAGE: {}\nSKILLS: {}\nDEGREES: {}\nTOTAL: {}\n"""
+            .format(
+                score_location,
+                score_language,
+                score_skills,
+                score_degrees,
+                score
+            )
+        )
+        return score
