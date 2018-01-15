@@ -9,7 +9,6 @@ import Login from '@/pages/Login'
 import MyOffers from '@/pages/MyOffers'
 import NotFound from '@/pages/NotFound'
 import Profile from '@/pages/Profile'
-import Recover from '@/pages/Recover'
 import Swipe from '@/pages/Swipe'
 import MyFormations from '@/pages/MyFormations'
 
@@ -39,11 +38,6 @@ export default new VueRouter({
       path: '/',
       name: 'Home',
       component: Home
-    },
-    {
-      path: '/recover',
-      name: 'Recover',
-      component: Recover
     },
     {
       path: '/swipe',
