@@ -1,7 +1,15 @@
 <template>
   <div class="container">
     <Navbar :title="title"></Navbar>
-    <Card v-for="id in my_ids" :card_id="id" :is_formation=false :key="id"></Card>
+    <div class="wrap">
+      <div class="cards">
+        <Card v-for="id in my_ids" 
+            :card_id="id" 
+            :is_formation=false 
+            :key="id"
+            class="cards_item"></Card>
+      </div> 
+    </div> 
   </div>
 </template>
 
@@ -36,5 +44,9 @@
 </script>
 
 <style scoped>
-
+.cards_item{
+  visibility: visible;
+  position: relative;
+  margin: 15px;
+}
 </style>

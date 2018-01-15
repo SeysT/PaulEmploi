@@ -1,30 +1,28 @@
 import Vue from 'vue'
 
-import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
 import VueCookies from 'vue-cookies'
+import VueResource from 'vue-resource'
+import VueRouter from 'vue-router'
 
-import Swipe from '@/pages/Swipe'
-import Login from '@/pages/Login'
-import Profile from '@/pages/Profile'
 import Home from '@/pages/Home'
+import Login from '@/pages/Login'
 import MyOffers from '@/pages/MyOffers'
-import Recover from '@/pages/Recover'
 import NotFound from '@/pages/NotFound'
+import Profile from '@/pages/Profile'
+import Recover from '@/pages/Recover'
+import Swipe from '@/pages/Swipe'
 import MyFormations from '@/pages/MyFormations'
 
 Vue.use(VueRouter)
-
 Vue.use(VueCookies)
-
 Vue.use(VueResource)
-Vue.http.options.root = 'http://localhost:8000/'
+Vue.http.options.root = 'https://germoon.nebulae.co/' // Si Django tourne en local : 'http://localhost:8000/api/'
 Vue.http.interceptors.push(function (request, next) {
   if (Vue.cookies.get('token') !== null) {
     request.headers.set('Authorization', 'Token ' + Vue.cookies.get('token'))
   }
   next(function (resp) {
-    if (resp.status === 401) {
+    if (resp.status === 401 || resp.status === 403 ) {
       this.$router.push({ name: 'Login', params: { errors: 401 } })
     }
   })

@@ -12,6 +12,11 @@
               'cards_item--active': cards_ids[0] === card_id,
             }" >
         </Card>
+        <div>
+          <p class='msg'>
+            {{ msg }}
+          </p>
+        </div>
         <div class="cards_item">
           <p class="background-text">No more cards to swipe!<br/><br/>But you're welcome to come back tomorrow! :)</p>
         </div>
@@ -38,14 +43,20 @@
       return {
         title: 'Swipe',
         cards_ids: ['1', '2', '3'],
-        isFormation: false
+        isFormation: false,
+        msg: ''
       }
     },
     methods: {
       get_ids: function (url) {
-        this.$http.get(url).then(function (resp) {
-          this.cards_ids += resp.body.map(card => card.id.toString())
-        })
+        this.$http.get(url).then(
+          function (resp) {
+            this.cards_ids += resp.body.map(card => card.id.toString())
+          },
+          function (resp){
+            this.msg = resp.statusText
+          }
+        )
       },
       get_offers_ids: function () {
         let url = 'api/profile/offers_to_show/'
@@ -79,83 +90,6 @@
 </script>
 
 <style scoped>
-.wrap{
-  width: 100%;
-  height: 100%;
-  max-width: 520px;
-  padding: 0 16px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.cards{
-  position: relative;
-  padding: 0;
-  margin: 0;
-  height: 450px;
-
-  list-style-type: none;
-}
-
-.cards_item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-
-  height: 450px;
-  overflow: auto;
-
-  border: 2px solid #96b7ff;
-  border-radius: 4px;
-  background-color: #eff4ff;
-
-  visibility: hidden;
-}
-
-.cards_item--active {
-  z-index: 1;
-  visibility: visible;
-  transition: all .4s .1s cubic-bezier(.87,-.41,.19,1.44);
-}
-
-.actions {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px 15px;
-}
-
-.button {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px 0;
-  display: block;
-  width: 63px;
-  height: 63px;
-
-  background-color: white;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-
-  transition: all .3s;
-}
-
-.like {
-  background-image: url(../assets/like.png);
-}
-
-.dislike {
-  background-image: url(../assets/dislike.png);
-}
-
 .background-text {
   position: relative;
   top: 8em;
