@@ -80,11 +80,11 @@ class OfferSelectorTest(TestCase):
 
     def test_offer_selector(self):
         selector = OfferSelector(self.user.profile, [self.offer1, self.offer2])
-        intereting_offers_ids = selector.get_interesting()
-        self.assertTrue(self.offer1.id in intereting_offers_ids)
-        self.assertFalse(self.offer2.id in intereting_offers_ids)
+        interesting_offers_ids = selector.get_interesting()
+        self.assertTrue(self.offer1.id in interesting_offers_ids)
+        self.assertFalse(self.offer2.id in interesting_offers_ids)
 
     def test_formation_selector(self):
         selector = FormationSelector(self.user.profile, [self.formation1])
-        intereting_formations_ids = selector.get_interesting()
-        self.assertTrue(self.formation1.id in intereting_formations_ids)
+        interesting_formations_ids = selector.get_interesting()
+        self.assertTrue(self.formation1.id in interesting_formations_ids)
